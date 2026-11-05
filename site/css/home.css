@@ -184,7 +184,7 @@
 .problem__frame img,
 .problem__wipe-in img { display: block; width: 100%; height: min(58svh, 460px); object-fit: cover; }
 .problem__frame--before img { object-position: 40% 50%; filter: grayscale(.45); }
-.problem__wipe-in img { object-position: 50% 25%; }
+.problem__wipe-in img { object-position: 50% 0%; } /* keep the full head in frame; the photo has little headroom */
 
 .problem__wipe { position: relative; overflow: hidden; }
 .problem__wipe-in { position: relative; }
@@ -223,7 +223,7 @@
 
 /* ---------- Desktop: pinned, scroll-scrubbed wipe ---------- */
 .has-scenes .problem__frame,
-.has-scenes .problem__wipe { position: absolute; inset: 0; }
+.has-scenes .problem__wipe { position: absolute; inset: var(--header-h) 0 0; } /* start below the solid header so it never covers the photo */
 .has-scenes .problem__frame img,
 .has-scenes .problem__wipe-in img { height: 100%; }
 .has-scenes .problem__wipe-in { position: absolute; inset: 0; }
