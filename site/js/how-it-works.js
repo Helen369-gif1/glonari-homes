@@ -77,6 +77,49 @@
     tl.to({}, { duration: .2 }); // hold the finished map; the closing line below is a plain reveal
   }
 
+  /* Chapters 01 and 02: the four cards lie in a pile and spread into their row on scroll
+     ("cards laid on the table"). Not pinned, scrubbed. 02: the pile sits on card 1 and
+     cards 2–4 slide right one after another. 01: the pile sits in the middle of the row,
+     02/03 go out first, 01/04 travel further and a little later. Horizontal only.
+     Offsets come from the cards' layout positions (offsetLeft ignores the transforms
+     GSAP sets), recomputed on every refresh. Captions show once a card has landed. */
+  const ROT = [-1.5, 1.2, -.8, 1.5];
+  function dealCards(grid, mode) {
+    const cards = $$(".hiw-card", grid);
+    if (cards.length !== 4) return () => {};
+    grid.classList.add("hiw-deal");
+    cards.forEach((c) => c.setAttribute("tabindex", "0"));
+    const caps = cards.map((c) => $$(":scope > :not(img)", c));
+    const mid = (c) => c.offsetLeft + c.offsetWidth / 2;
+    // where the pile's centre is, and each card's small offset inside the pile (top card = 1st)
+    const pileX = () => (mode === "left" ? mid(cards[0]) : (mid(cards[1]) + mid(cards[2])) / 2);
+    const layer = (i) => (mode === "left" ? i * 5 : (i - 1.5) * 5);
+    const off = (i) => () => pileX() - mid(cards[i]) + layer(i);
+
+    const tl = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: {
+        trigger: grid, start: "top 80%", end: "top 30%", scrub: .8, invalidateOnRefresh: true,
+        onUpdate: (st) => grid.classList.toggle("is-dealt", st.progress > .999),
+      },
+    });
+    const move = (i, at, dur) => {
+      tl.fromTo(cards[i], { x: off(i), rotation: ROT[i] }, { x: 0, rotation: 0, duration: dur }, at)
+        .fromTo(caps[i], { opacity: 0 }, { opacity: 1, duration: .1 }, at + dur);
+    };
+    if (mode === "left") {
+      move(0, 0, .2);                                   // card 1 stays put, only straightens
+      [1, 2, 3].forEach((i) => move(i, (i - 1) * .08, .72));
+    } else {
+      move(1, 0, .7); move(2, 0, .7);                   // inner pair first
+      move(0, .12, .76); move(3, .12, .76);             // outer pair: further and later
+    }
+    return () => {
+      grid.classList.remove("hiw-deal", "is-dealt");
+      cards.forEach((c) => c.removeAttribute("tabindex"));
+    };
+  }
+
   /* Chapter openers (02, 05, 08): the photo comes slowly closer while it passes. Not pinned. */
   function openers() {
     $$("[data-opener]").forEach((op) => {
@@ -175,6 +218,13 @@
     return () => { doc.classList.remove("has-scenes"); if (undoResults) undoResults(); };
   });
   mm.add("(prefers-reduced-motion: no-preference)", () => { openers(); });
+  // >=1101px: the grid is one row of 4 there (2x2 below, which would need vertical moves)
+  mm.add("(min-width: 1101px) and (prefers-reduced-motion: no-preference)", () => {
+    const undo = [["#ch-01 .hiw-grid4", "center"], ["#ch-02 .hiw-grid4", "left"]]
+      .map(([s, mode]) => { const g = $(s); return g ? dealCards(g, mode) : () => {}; });
+    ScrollTrigger.refresh();
+    return () => undo.forEach((f) => f());
+  });
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) chatDuo();
   doc.classList.remove("scenes-pending");
   window.addEventListener("load", () => ScrollTrigger.refresh());

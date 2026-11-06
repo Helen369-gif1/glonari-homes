@@ -305,6 +305,24 @@ html:not(.has-scenes) .hiw-hero__cue { display: none; }
 @media (max-width: 1100px) { .hiw-grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 480px)  { .hiw-grid4 { grid-template-columns: 1fr; } }
 
+/* Deal: "cards laid on the table" (JS adds .hiw-deal at >=1101px, 4 in a row, motion-safe).
+   The cards start as one pile and spread into the grid on scroll (dealCards() in
+   how-it-works.js moves them with transform). Default CSS above = the final grid. */
+.js .hiw-deal .hiw-card[data-reveal] { opacity: 1; transform: none; transition: scale .35s var(--ease); }
+.hiw-deal .hiw-card { position: relative; }
+.hiw-deal .hiw-card:nth-child(1) { z-index: 4; }
+.hiw-deal .hiw-card:nth-child(2) { z-index: 3; }
+.hiw-deal .hiw-card:nth-child(3) { z-index: 2; }
+.hiw-deal .hiw-card:nth-child(4) { z-index: 1; }
+.hiw-deal .hiw-card img { box-shadow: 0 6px 18px rgba(40, 28, 18, .12); transition: box-shadow .35s var(--ease); }
+/* !important: GSAP writes an inline `scale: none` next to its transform */
+.hiw-deal.is-dealt .hiw-card:focus-visible { scale: 1.04 !important; }
+.hiw-deal.is-dealt .hiw-card:focus-visible img { box-shadow: 0 18px 40px rgba(40, 28, 18, .22); }
+@media (hover: hover) {
+  .hiw-deal.is-dealt .hiw-card:hover { scale: 1.04 !important; }
+  .hiw-deal.is-dealt .hiw-card:hover img { box-shadow: 0 18px 40px rgba(40, 28, 18, .22); }
+}
+
 /* ---------- 03 · Two cards; on desktop hover/focus widens one (Shopify-style grid columns) ----------
    A calm "pause": no pin. Each photo carries a small decorative chat (aria-hidden), driven by
    chatDuo() in how-it-works.js; without JS / with reduced motion the 3 static bubbles in the markup show. */
