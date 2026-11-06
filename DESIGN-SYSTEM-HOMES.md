@@ -68,7 +68,18 @@ Defined in `css/main.css`:
 | `--gh-ink` | `#1F1A14` | primary text, default button fill |
 | `--gh-ink-2` | `#5C5145` | secondary/muted text |
 | `--gh-gold-ink` | `#8A6628` | gold that must read as text on cream (eyebrows) |
-| `--gh-brown` | `#2B1A0C` | footer background, button hover |
+| `--gh-brown` | `#2B1A0C` | footer background, button hover, the dark sections (see 4.1) |
+| `--gh-honey` / `--gh-honey-ink` | `#D9BE85` / `#4A3712` | step card "Live" (TBYB timeline) — fill / text |
+| `--gh-slate` / `--gh-slate-ink` | `#8FA9C4` / `#1D3049` | step card "Build" — fill / text |
+| `--gh-navy` | `#3F5F86` | step card "Decide" — fill (text `--gh-cream`) |
+
+The three step colours are only for coloured step cards on a dark band (Living With Glonari, Try Before You Buy). No green or olive tones.
+
+### 4.1 Dark sections (owner's decision)
+
+Besides the footer, the site has deliberate dark (`--gh-brown`) bands: How It Works chapter 05 (GLO), a future manifesto section, and Living With Glonari section 2 (Try Before You Buy — the third, an exception approved by the owner, 2026-11-06). A dark band in the middle of a page enters and leaves through soft paper↔brown stretches (`clamp(120px, 18svh, 220px)`), not a hard edge.
+
+Living With Glonari section 3 "Two ways to own" is also dark (owner's decision, 2026-11-06): it continues Try Before You Buy as one dark chapter — the two sections share solid `--gh-brown` with no seam. On this page the owner rejected the soft stretches (2026-11-06): the chapter has hard paper↔brown edges, with one `--section-y` of padding on each side of each edge (inside its own band). Further down that page: "When life changes" and "Gia goes with you" are light, "The bigger idea" is dark.
 
 ### 3.4 Existing use of Glonari Pulse tokens (open item)
 
@@ -141,11 +152,13 @@ New pages should test at 1440×900, 1024px, 768px and 375px, matching how the ho
 | Reveal animation | `[data-reveal]` / `.is-in` | Simple fade-up for static ("pause") content blocks; disabled under `prefers-reduced-motion: reduce`. |
 | Scene (pinned scroll stage) | `.scene`, `.scene__stage`, `.has-scenes` | Tall wrapper + sticky full-screen stage for scrubbed GSAP timelines; CSS alone renders the static final layout (mobile / reduced motion / no-JS); `.has-scenes` + pinning is added by `gsap.matchMedia` at `min-width: 769px`. Used by: hero, problem (before/after), formula (the three cards), economics, Try Before You Buy. |
 | Formula card | `.fcard` | Square image + label, used in the "Home + Business + Gia" scene. |
-| Chat widget | `.chat`, `.msg--you`, `.msg--gia`, `.msg--typing` | Example conversation with Gia (Section 5 of the home page). |
+| Chat widget | `.chat`, `.msg--you`, `.msg--gia`, `.msg--typing` | Conversation with Gia. Look and typing dots live in `main.css`; each page sets only the placement (home "Meet Gia": `.gia .chat` in `home.css`; Living "Gia goes with you": `.liv-gia__chat`, scrubbed history in `living.js`). |
 | TBYB frame | `.tbyb__frame`, `.tbyb__progress` | Horizontal scroll track with numbered captioned frames. |
 | Chapter rail (How It Works) | `.hiw-toc` + `--rail` | Fixed left chapter list ≥1101px (content padded by `--rail`), compact "02 / 08" chip below; `.is-dark` inverts it over dark areas. |
 | Chapter opener | `.hiw-opener` | Full-screen photo pause: left veil, huge Cormorant number, heading revealed line by line (`--d`), slow zoom. |
 | Chapter head | `.hiw-head` | Big gold Cormorant number (lining figures) + eyebrow + `.h2`. |
+| Gold line / timeline (Living) | `.liv-rail`, `--tl-x`, `.liv-step__card` | One 1px gold vertical (`--gp-gold-mid`) shared by Security and TBYB via `--tl-x` (share of the container width); starts at a 13px ring; in TBYB it becomes a step scale (mono labels left, cards right, travelling dot). Cards: outlined, or filled with the step colours + slight tilt. In "Two ways to own" the line splits into two SVG paths to the cards (≥1101px, motion-safe). |
+| Ownership duo (Living) | `.liv-own__duo`, `.liv-own__card` | The `.hiw-duo` two-card hover-widen pattern repeated on brown: card fill cream 5%, 1px cream 12% border, gold focus outline. |
 | Line icons | `.hiw-icon` + `<symbol>` sprite | 48×48, 1.5px stroke, `currentColor` (gold-ink on cream, cream on dark). |
 
 ### 7.1 Media rules (as built)
@@ -168,7 +181,7 @@ New pages should test at 1440×900, 1024px, 768px and 375px, matching how the ho
 - Do not add a sky-blue secondary accent.
 - Do not change button radius to 6–8px or drop pill buttons.
 - Do not move H1/H2 to IBM Plex Sans.
-- Do not introduce Reserve's or Pulse's full dark-mode surfaces — Glonari Homes has exactly one dark section (the footer), governed by 3.4.
+- Do not introduce Reserve's or Pulse's full dark-mode surfaces — Glonari Homes is light; the footer (governed by 3.4) and the few dark bands listed in 4.1 are the only dark areas.
 
 ## 10. Before building a new page
 

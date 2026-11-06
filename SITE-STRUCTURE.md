@@ -56,18 +56,20 @@ A "magazine in eight chapters". Page files: `css/how-it-works.css`, `js/how-it-w
 7. Privacy — copy + three icon labels
 8. The Whole System — opener, then scene: cut-out + five cards, closing line, CTA → `living-with-glonari.html`
 
-### 3. Living With Glonari — `site/living-with-glonari.html` — ⏳ stub only
+### 3. Living With Glonari — `site/living-with-glonari.html` — 🚧 hero + sections 1–5 built
+
+Page files: `css/living.css`, `js/living.js`. Pinned scenes (owner's decision, four): Hero, Try Before You Buy, Gia goes with you, The bigger idea.
 
 Planned sections:
 
-- Hero
-1. Security
-2. Try Before You Buy™
-3. Two ways to own
-4. When life changes
-5. Gia goes with you
+- Hero (scene) — garden → kitchen → "LIVING" → family cut-out, copy "This Is Your Home While You Build Your Future." ✅
+1. Security (`#security`, pause, paper) — 01–04 + note; the gold line starts here ✅
+2. Try Before You Buy™ (`#try-before-you-buy`, scene, dark) — the gold line becomes the Prepare → Decide timeline with step cards ✅
+3. Two ways to own (`#ownership`, linked from the home page; pause, dark — continues TBYB) — two hover-widen cards, the gold line splits into two paths, closing line ✅
+4. When life changes (`#when-life-changes`, pause, paper) — three square photo cards with mono captions, then the 4-step move flow on the gold line (horizontal and drawn on scroll ≥769px, vertical list otherwise) ✅
+5. Gia goes with you (`#gia-goes-with-you`, scene, paper) — one room by a big window, four views behind the glass (City · Suburb · By the sea · Garden home), Gia's chat keeps its history; phones: room + chat below + 4 view cards ✅
 6. The journey before and after
-7. The bigger idea
+7. The bigger idea (scene)
 
 ### 4. Already Own a Home? — `site/already-own-a-home.html` — ⏳ stub only
 
