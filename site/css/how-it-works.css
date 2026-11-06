@@ -76,14 +76,37 @@
 }
 
 /* ---------- Sections 1–2: card grids ---------- */
-.hiw-parts, .hiw-value { padding-top: var(--section-y); }
+.hiw-parts { padding-top: var(--section-y); }
+.hiw-value { padding-top: 0; }
+.hiw-value .hiw-parts__grid { margin-top: var(--section-y); }
+
+/* ---------- Chapter opener (section 2): full-screen photo + big heading ----------
+   Same img + veil recipe as the hero stage, but a calm "pause": no pin, no zoom, just reveal. */
+.hiw-chapter { position: relative; min-height: 100svh; overflow: hidden; isolation: isolate; }
+.hiw-chapter__img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 28% 48%; }
+.hiw-chapter__veil { position: absolute; inset: 0; z-index: -1; background: linear-gradient(100deg, rgba(20,14,10,.64) 0%, rgba(20,14,10,.4) 40%, rgba(20,14,10,0) 66%); }
+.hiw-chapter__copy { padding-top: calc(var(--header-h) + 8svh); /* the solid header sits over the top of the photo */ padding-bottom: 64px; color: var(--gp-text); }
+.hiw-chapter__copy > * { max-width: 620px; }
+.hiw-chapter__copy .lead { color: rgba(246,240,231,.9); text-shadow: 0 1px 14px rgba(5,4,2,.35); }
+.hiw-chapter__copy .h2 { text-shadow: 0 2px 30px rgba(5,4,2,.3); }
+
+@media (max-width: 768px) {
+  .hiw-chapter { display: flex; flex-direction: column; justify-content: flex-end; }
+  .hiw-chapter__img { object-position: 78% 55%; }
+  /* taller than the hero veil: this copy is long and fills ~60% of a phone screen */
+  .hiw-chapter__veil { background: linear-gradient(to top, rgba(20,14,10,.82) 0%, rgba(20,14,10,.62) 50%, rgba(20,14,10,.3) 72%, rgba(20,14,10,0) 88%); }
+  .hiw-chapter__copy { padding-top: 0; padding-bottom: 104px; } /* clears the fixed "01 / 08" chip, as in the hero */
+  /* Phones: the second sentence of the lead is hidden visually (still read by screen readers)
+     so the copy does not cover the café guests. Text itself is unchanged (approved copy). */
+  .hiw-chapter__more { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+}
 .hiw-parts__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 48px; }
 .hiw-card img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); }
 .hiw-card__n { margin: 18px 0 2px; font-family: var(--font-mono); font-weight: 600; font-size: 12px; letter-spacing: .14em; color: var(--gh-gold-ink); }
 .hiw-card__title { margin: 4px 0 6px; font-family: var(--font-display); font-weight: 500; font-size: 22px; }
 .hiw-card img + .hiw-card__title { margin-top: 18px; } /* cards without a number (section 2) */
 .hiw-card p:not(.hiw-card__n) { color: var(--gh-ink-2); font-size: 15px; }
-.hiw-parts__line, .hiw-value .lead { margin-top: 40px; font-family: var(--font-word); font-weight: 500; font-size: clamp(24px, 2.6vw, 34px); text-wrap: balance; }
+.hiw-parts__line { margin-top: 40px; font-family: var(--font-word); font-weight: 500; font-size: clamp(24px, 2.6vw, 34px); text-wrap: balance; }
 
 @media (max-width: 1100px) { .hiw-parts__grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 480px)  { .hiw-parts__grid { grid-template-columns: 1fr; } }
