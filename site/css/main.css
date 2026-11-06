@@ -182,8 +182,11 @@ html.lenis, html.lenis body { height: auto; }
   text-transform: uppercase;
   text-decoration: none;
 }
-.brand span { font-weight: 500; opacity: .75; }
-.site-header:not(.is-solid) .brand { text-shadow: 0 1px 14px rgba(5, 4, 2, .3); }
+.brand img { display: block; height: calc(var(--header-h) * 0.53); width: auto; }
+@media (min-width: 1101px) {
+  :root { --header-h: 92px; }
+  .brand img { height: 66px; }
+}
 
 .nav { margin-left: auto; }
 .nav__list { display: flex; gap: 28px; margin: 0; padding: 0; list-style: none; }

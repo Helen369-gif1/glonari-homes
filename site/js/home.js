@@ -86,7 +86,7 @@
     const steps = $$(".econ__step", scene);
 
     const tl = gsap.timeline({ scrollTrigger: scrubTo(scene) });
-    tl.fromTo(house, { xPercent: -50, yPercent: 30 }, { xPercent: -50, yPercent: 0, duration: 1, ease: "power2.out" }, 0)
+    tl.fromTo(house, { yPercent: 30 }, { yPercent: 0, duration: 1, ease: "power2.out" }, 0)
       .fromTo(intro, { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -40, duration: .6, ease: "power2.in" }, 1.2);
 
     const enter = (step, at) => {

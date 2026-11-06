@@ -421,12 +421,13 @@
 .has-scenes .econ__step--split .econ__label { max-width: 300px; }
 .has-scenes .econ__house {
   position: absolute;
-  left: 50%;
+  left: 0;
+  right: 0;
   bottom: 0;
   z-index: 1;
   width: min(96vw, 116svh);
   max-width: none;
-  transform: translateX(-50%);
+  margin-inline: auto;
 }
 .has-scenes .econ__disclosure { position: absolute; left: 0; right: 0; bottom: 0; padding-inline: var(--page-pad); }
 
