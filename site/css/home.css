@@ -424,7 +424,7 @@
   left: 50%;
   bottom: 0;
   z-index: 1;
-  width: min(84vw, 102svh);
+  width: min(96vw, 116svh);
   max-width: none;
   transform: translateX(-50%);
 }
