@@ -12,6 +12,8 @@ python -m http.server 5173 --directory site
 
 Then open `http://localhost:5173` in a browser.
 
+If you changed `site/partials/header.html` or `footer.html`, run `python scripts/sync-partials.py` first.
+
 The same command is saved as `.claude/launch.json` ("glonari-site") for Claude Code's preview tool.
 
 ## Open this project on another computer
@@ -39,6 +41,9 @@ site/
   css/home.css                         — home-page-only section styles
   js/main.js, js/hero.js, js/home.js   — Lenis, header/menu, reveal, scene animations
   assets/images/                       — WebP images
+  partials/header.html, footer.html    — the single source of the header/footer
+scripts/
+  sync-partials.py                     — copies the partials into every site/*.html page
 ```
 
 Site text is English only. Project conversation and documentation are in Russian, per the owner's preference.

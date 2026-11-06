@@ -60,6 +60,16 @@
     window.matchMedia("(min-width: 1101px)").addEventListener("change", (e) => { if (e.matches) setMenu(false); });
   }
 
+  /* ---------- Active nav link ---------- */
+  if (nav) {
+    const here = location.pathname.split("/").pop() || "index.html";
+    nav.querySelectorAll("a[href]").forEach((a) => {
+      const href = a.getAttribute("href").split("/").pop();
+      if (href === here) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    });
+  }
+
   /* ---------- Reveal ---------- */
   const items = document.querySelectorAll("[data-reveal]");
   if ("IntersectionObserver" in window && !reduce.matches) {

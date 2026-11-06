@@ -25,7 +25,7 @@ Read, in order: this file, then `PROJECT-STATUS.md` (what's done / in progress /
 
 ## Stack and decisions
 - Plain static HTML/CSS/JS, no build step. GSAP 3.12.5 + ScrollTrigger (cdnjs) and Lenis 1.1.13 (unpkg) load from CDNs.
-- Header and footer markup is copied into every page.
+- Header and footer live once in `site/partials/header.html` and `footer.html`, embedded into every page between `<!-- partial:header -->` / `<!-- partial:footer -->` markers. After editing a partial, run `python scripts/sync-partials.py` to propagate the change into every page before previewing or committing. The active menu item (`aria-current="page"`) is set by `site/js/main.js`, not in the markup.
 - Hero: keep the owner's version (the word "GLONARI", copy "Your dream home. A new way to make it yours." + "Meet Gia…"). Don't swap in the hero copy from v2.
 - The CTA lighting effect uses the soft version with no mask. The owner approved this.
 - `site/assets/images/`: WebP files, named `page-section-description-width.webp`. Convert new images with ffmpeg (libwebp).

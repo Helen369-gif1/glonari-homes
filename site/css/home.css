@@ -246,8 +246,13 @@
    3. What a Glonari Home is (formula)
    ========================================================== */
 .formula { padding-top: var(--section-y); }
+/* the pinned stage already clears the header with its own top padding;
+   adding --section-y on top of it doubled the gap after the problem statement */
+.has-scenes .formula { padding-top: 0; }
 .formula__stage {
-  --card: min(23vw, 33svh, 320px);
+  /* 46svh: the largest card that still lets eyebrow + cards + result fit
+     inside the 100svh sticky stage (checked down to 1280×720) */
+  --card: min(25vw, 46svh, 420px);
   display: flex;
   flex-direction: column;
   align-items: center;
