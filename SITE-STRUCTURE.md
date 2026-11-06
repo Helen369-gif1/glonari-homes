@@ -41,12 +41,13 @@ Intended reading order: Home → How It Works → Living With Glonari → Find Y
 6. Try first, decide later (Try Before You Buy™)
 7. Final call to action
 
-### 2. How It Works — `site/how-it-works.html` — ⏳ stub only
+### 2. How It Works — `site/how-it-works.html` — ⏳ partly built
 
-Planned sections (architecture doc):
+Page styles: `site/css/how-it-works.css`. Sections 3–8 are a one-block placeholder until their images arrive.
 
-1. The four parts
-2. Where the value comes from
+- Hero (built) — terrace family photo, copy "How a Glonari Home Works"
+1. The four parts (built)
+2. Where the value comes from (built)
 3. What participation means
 4. How results work
 5. GLO: the power behind Gia

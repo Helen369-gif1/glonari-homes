@@ -1,0 +1,37 @@
+/* ==========================================================
+   Glonari Homes — How It Works page
+   Page-only styles. Shared tokens/components live in main.css.
+   ========================================================== */
+
+/* ---------- Hero (same img + gradient veil recipe as .cta in home.css, no pin) ---------- */
+.hiw-hero { position: relative; min-height: 86svh; overflow: hidden; isolation: isolate; }
+.hiw-hero__img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 38% 55%; }
+.hiw-hero__veil { position: absolute; inset: 0; z-index: -1; background: linear-gradient(100deg, rgba(20,14,10,.55) 0%, rgba(20,14,10,.28) 38%, rgba(20,14,10,0) 62%); }
+/* .container keeps the page grid (left edge matches the header logo); the width limit
+   goes on the children, otherwise margin-inline:auto centres the copy onto the family. */
+.hiw-hero__copy { padding-top: calc(var(--header-h) + 14svh); padding-bottom: 64px; color: var(--gp-text); }
+.hiw-hero__copy > * { max-width: 540px; }
+.hiw-hero__copy .lead { color: rgba(246,240,231,.9); text-shadow: 0 1px 14px rgba(5,4,2,.35); }
+.hiw-hero__copy .h2 { text-shadow: 0 2px 30px rgba(5,4,2,.3); }
+
+/* Portrait screens: at 38% the family falls out of frame. Frame the family instead,
+   and move the copy to the bottom over a bottom-up veil so it never covers the faces. */
+@media (max-width: 768px) {
+  .hiw-hero { display: flex; flex-direction: column; justify-content: flex-end; }
+  .hiw-hero__img { object-position: 64% 50%; }
+  .hiw-hero__veil { background: linear-gradient(to top, rgba(20,14,10,.78) 0%, rgba(20,14,10,.5) 38%, rgba(20,14,10,0) 62%); }
+  .hiw-hero__copy { padding-top: 0; padding-bottom: 40px; }
+}
+
+/* ---------- Sections 1–2: card grids ---------- */
+.hiw-parts, .hiw-value { padding-top: var(--section-y); }
+.hiw-parts__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 48px; }
+.hiw-card img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); }
+.hiw-card__n { margin: 18px 0 2px; font-family: var(--font-mono); font-weight: 600; font-size: 12px; letter-spacing: .14em; color: var(--gh-gold-ink); }
+.hiw-card__title { margin: 4px 0 6px; font-family: var(--font-display); font-weight: 500; font-size: 22px; }
+.hiw-card img + .hiw-card__title { margin-top: 18px; } /* cards without a number (section 2) */
+.hiw-card p:not(.hiw-card__n) { color: var(--gh-ink-2); font-size: 15px; }
+.hiw-parts__line, .hiw-value .lead { margin-top: 40px; font-family: var(--font-word); font-weight: 500; font-size: clamp(24px, 2.6vw, 34px); text-wrap: balance; }
+
+@media (max-width: 1100px) { .hiw-parts__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px)  { .hiw-parts__grid { grid-template-columns: 1fr; } }

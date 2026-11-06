@@ -20,17 +20,25 @@ Last updated: 2026-11-06. Update this file after every significant step so a new
 
 ## In progress
 
-- Nothing is mid-build right now. The home page is awaiting the owner's review before the next page starts.
+- How It Works (`site/how-it-works.html`, 2026-11-06) — the stub was replaced with the real top of the page:
+  - Hero: photo `how-00-terrace-family` with a left-side gradient veil (same img + veil recipe as `.cta`, no pin), copy "How a Glonari Home Works" / "A home, a personal AI and a real business, working together for you." The section has `data-hero`, so the header is transparent over it like on the home page. Desktop: copy sits on the sky at the left, inside the page grid (the width limit is on the copy's children so the `.container` does not centre it onto the family). ≤768px: the photo is framed on the family (`object-position: 64% 50%`) and the copy moves to the bottom over a bottom-up veil.
+  - Section 1 "The Four Parts" and Section 2 "Where the value comes from": 4 photo cards each (4:5, rounded), copy verbatim from Architecture & Copy v2. Grid: 4 columns desktop, 2 at ≤1100px, 1 at ≤480px.
+  - Sections 3–8: one short "Coming next" placeholder until their images arrive.
+  - New page stylesheet `site/css/how-it-works.css`, linked after `main.css`.
+  - Images converted to WebP with ffmpeg (q 82): `how-00-terrace-family-2560/-1600.webp`, `how-01-{house,gia,business,connections}-1200.webp` (1200×1500), `how-02-{savings,partners,referrals,knowledge}-1200.webp` (actually 1122×1402 — the sources are that size; the `-1200` suffix kept for consistency, `<img>` sizes use the real dimensions). PNG/JPG masters kept. `how-00-glo-hall.png`, `how-00-market-cards.png`, `how-00-system-circle.png` are not used yet (likely for sections 5–8).
+  - Checked at 1440px, 900px and 375px: hero readable, grids correct, all reveal blocks animate in, active menu item "How It Works", no horizontal scroll. At 900px (narrow portrait tablet) the mother is partly cut off at the right edge of the hero — acceptable for now.
+  - Awaiting the owner's review. Card images have empty `alt` (decorative, titles carry the meaning).
 
 ## Not started
 
-Five stub pages (shared header/footer + a one-line placeholder only), in the build order from `Glonari Homes — Website Architecture & Copy v2.docx`:
+Four stub pages (shared header/footer + a one-line placeholder only), in the build order from `Glonari Homes — Website Architecture & Copy v2.docx`:
 
-1. How It Works
-2. Living With Glonari
-3. Already Own a Home?
-4. Find Your Home
-5. FAQs
+1. Living With Glonari
+2. Already Own a Home?
+3. Find Your Home
+4. FAQs
+
+(How It Works sections 3–8 also remain — see "In progress".)
 
 See `SITE-STRUCTURE.md` for each page's planned sections.
 
@@ -45,7 +53,7 @@ See `SITE-STRUCTURE.md` for each page's planned sections.
 
 ## Next step
 
-Owner reviews the home page and sends changes. After that: build the remaining pages in the order listed above, each following `DESIGN-SYSTEM-HOMES.md` and the section list in `SITE-STRUCTURE.md`.
+Owner reviews the How It Works hero + sections 1–2 and sends images for sections 3–8. Then: finish How It Works, and build the remaining pages in the order listed above, each following `DESIGN-SYSTEM-HOMES.md` and the section list in `SITE-STRUCTURE.md`.
 
 ## How to resume on another computer
 
