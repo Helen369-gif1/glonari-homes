@@ -45,7 +45,8 @@ Intended reading order: Home → How It Works → Living With Glonari → Find Y
 
 Page styles: `site/css/how-it-works.css`. Sections 3–8 are a one-block placeholder until their images arrive.
 
-- Hero (built) — terrace family photo, copy "How a Glonari Home Works"
+- Hero (built) — pinned scene on the terrace family photo (zoom + copy out on scroll), copy "How a Glonari Home Works"
+- Fixed chapter index 01–08 (compact "01 / 08" at ≤1100px); chapter anchors `#ch-01`…`#ch-08`
 1. The four parts (built)
 2. Where the value comes from (built)
 3. What participation means

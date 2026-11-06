@@ -44,19 +44,38 @@
 <main id="main">
 
   <section class="hiw-hero" data-hero>
-    <img class="hiw-hero__img" src="assets/images/how-00-terrace-family-2560.webp"
-         srcset="assets/images/how-00-terrace-family-1600.webp 1600w, assets/images/how-00-terrace-family-2560.webp 2560w"
-         sizes="100vw" width="2560" height="1440" loading="eager" fetchpriority="high"
-         alt="A family sits together on a terrace at dusk, the father holding a tablet, with hills and city lights in the distance">
-    <div class="hiw-hero__veil" aria-hidden="true"></div>
-    <div class="container hiw-hero__copy" data-reveal>
-      <p class="eyebrow eyebrow--light">How It Works</p>
-      <h1 class="h2">How a Glonari Home Works</h1>
-      <p class="lead">A home, a personal AI and a real business, working together for you.</p>
+    <div class="scene hiw-hero__scene" data-scene="hiw-hero" style="--travel: 90svh">
+      <div class="scene__stage hiw-hero__stage">
+        <img class="hiw-hero__img" src="assets/images/how-00-terrace-family-2560.webp"
+             srcset="assets/images/how-00-terrace-family-1600.webp 1600w, assets/images/how-00-terrace-family-2560.webp 2560w"
+             sizes="100vw" width="2560" height="1440" loading="eager" fetchpriority="high"
+             alt="A family sits together on a terrace at dusk, the father holding a tablet, with hills and city lights in the distance">
+        <div class="hiw-hero__veil" aria-hidden="true"></div>
+        <div class="container hiw-hero__copy">
+          <p class="eyebrow eyebrow--light hiw-hero__in" style="--d:0">The Journey &middot; 01</p>
+          <h1 class="h2 hiw-hero__in" style="--d:1">How a Glonari Home Works</h1>
+          <p class="lead hiw-hero__in" style="--d:2">A home, a personal AI and a real business, working together for you.</p>
+        </div>
+        <div class="hiw-hero__cue" aria-hidden="true">Scroll</div>
+      </div>
     </div>
   </section>
 
-  <section class="hiw-parts">
+  <nav class="hiw-toc" aria-label="Page chapters" data-hiw-toc>
+    <p class="hiw-toc__compact" aria-hidden="true"><span data-hiw-toc-current>01</span> / 08</p>
+    <ol>
+      <li data-chapter="1"><a href="#ch-01"><span class="hiw-toc__n">01</span>Four Parts</a></li>
+      <li data-chapter="2"><a href="#ch-02"><span class="hiw-toc__n">02</span>Where Money Comes From</a></li>
+      <li data-chapter="3"><a href="#ch-03"><span class="hiw-toc__n">03</span>Your Participation</a></li>
+      <li data-chapter="4"><a href="#ch-04"><span class="hiw-toc__n">04</span>How Results Work</a></li>
+      <li data-chapter="5"><a href="#ch-05"><span class="hiw-toc__n">05</span>GLO</a></li>
+      <li data-chapter="6"><a href="#ch-06"><span class="hiw-toc__n">06</span>Your Statement</a></li>
+      <li data-chapter="7"><a href="#ch-07"><span class="hiw-toc__n">07</span>Privacy</a></li>
+      <li data-chapter="8"><a href="#ch-08"><span class="hiw-toc__n">08</span>The Whole System</a></li>
+    </ol>
+  </nav>
+
+  <section class="hiw-parts" id="ch-01">
     <div class="container" data-reveal>
       <p class="eyebrow">How It Works</p>
       <h2 class="h2">The Four Parts</h2>
@@ -90,7 +109,7 @@
     <p class="container hiw-parts__line" data-reveal>Four parts. One simple experience.</p>
   </section>
 
-  <section class="hiw-value">
+  <section class="hiw-value" id="ch-02">
     <div class="container" data-reveal>
       <p class="eyebrow">Where the value comes from</p>
       <h2 class="h2">The Money Comes From Real Activity. Not From Living in the House.</h2>
@@ -177,5 +196,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script src="js/main.js" defer></script>
+<script src="js/how-it-works.js" defer></script>
 </body>
 </html>
