@@ -6,6 +6,15 @@ Multi-page marketing site for Glonari Homes. The site is English only. Talk to t
 
 Read, in order: this file, then `PROJECT-STATUS.md` (what's done / in progress / left / open questions), `DESIGN-SYSTEM-HOMES.md` (colors, typography, spacing, components), `SITE-STRUCTURE.md` (pages, navigation, per-page sections). Together they restore full context without needing the chat history — the project is worked on from two computers.
 
+## Обязательные правила
+
+- **Отчёт после работы минимальный:** 3–6 строк — что сделано, какие файлы, что осталось открытым. Без скриншотов, без пересказа кода. Скриншоты делать и присылать только если владелец просит.
+- **Проверять работу самому и дёшево:** ошибки в консоли, что картинки грузятся, что раскладка не ломается на 1440 и 375 px. Скриншоты для себя — только если без них не понять проблему.
+- **Картинки и видео оптимизировать самому, без отдельной просьбы,** каждый раз, когда в `site/assets/images` появляется новый исходник:
+  - картинки → WebP через ffmpeg (libwebp, q 78; с прозрачностью — сохранить альфу), две ширины: 2560 и 1600 для полноэкранных, 1200 и 800 для карточек; имена `page-section-description-width.webp`;
+  - видео → MP4 H.264 (crf 26, без звука, faststart) + WebM, до 4 МБ на петлю;
+  - исходные PNG/JPG/MP4 переносить в папку `masters/` в корне проекта (она не публикуется); на сайте оставлять только оптимизированные файлы.
+
 ## Permanent rules
 
 - Before building or changing any page, read `DESIGN-SYSTEM-HOMES.md` (including its component catalog, §7) and the relevant page entry in `SITE-STRUCTURE.md`.

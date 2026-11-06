@@ -44,6 +44,7 @@ site/
   partials/header.html, footer.html    — the single source of the header/footer
 scripts/
   sync-partials.py                     — copies the partials into every site/*.html page
+masters/                               — original PNG/JPG/MP4 sources (not published; the site uses WebP/MP4 from them)
 ```
 
 Site text is English only. Project conversation and documentation are in Russian, per the owner's preference.

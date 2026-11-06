@@ -41,20 +41,20 @@ Intended reading order: Home → How It Works → Living With Glonari → Find Y
 6. Try first, decide later (Try Before You Buy™)
 7. Final call to action
 
-### 2. How It Works — `site/how-it-works.html` — ⏳ partly built
+### 2. How It Works — `site/how-it-works.html` — ✅ built (awaiting owner review)
 
-Page styles: `site/css/how-it-works.css`. Sections 3–8 are a one-block placeholder until their images arrive.
+A "magazine in eight chapters". Page files: `css/how-it-works.css`, `js/how-it-works.js`. Pinned scenes: first screen, 04, 08 (exactly three). Chapter anchors `#ch-01`…`#ch-08`.
 
-- Hero (built) — pinned scene on the terrace family photo (zoom + copy out on scroll), copy "How a Glonari Home Works"
-- Fixed chapter index 01–08 (compact "01 / 08" at ≤1100px); chapter anchors `#ch-01`…`#ch-08`
-1. The four parts (built)
-2. Where the value comes from (built)
-3. What participation means
-4. How results work
-5. GLO: the power behind Gia
-6. Your monthly statement
-7. Privacy
-8. The whole system
+- First screen (scene) — layered terrace / "HOW IT WORKS" / family cut-out, copy "How a Glonari Home Works"
+- Chapter rail 01–08, fixed left (compact "02 / 08" at ≤1100px)
+1. Four Parts — 4 cards
+2. Where the Money Comes From — full-screen opener, paragraph, 4 source cards, closing line
+3. Participation — two highlighted columns
+4. How Results Work (scene) — flow diagram + statement + disclaimer
+5. GLO (the only dark chapter) — opener, GLO seal, is / is-not panels, note
+6. Your Statement — Digital Banker mock-up built in code + chat with Gia
+7. Privacy — copy + three icon labels
+8. The Whole System — opener, then scene: cut-out + five cards, closing line, CTA → `living-with-glonari.html`
 
 ### 3. Living With Glonari — `site/living-with-glonari.html` — ⏳ stub only
 

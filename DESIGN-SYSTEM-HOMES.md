@@ -101,6 +101,8 @@ Container pattern:
 }
 ```
 
+Section spacing rule: a section gets only `padding-top: var(--section-y)`. Never put `--section-y` on both the top and the bottom — the paddings of neighbouring sections add up and double the gap. Only the last section before the footer gets a bottom `--section-y`. A section with a pinned scene gets `padding-top: 0` under `.has-scenes`, because the scene stage brings its own space from the header. (How It Works also follows two corollaries: a section that starts with a full-bleed photo takes the gap as `margin-top`, so it shows the page background; a section on its own background colour, like the dark chapter 05, keeps a bottom `--section-y` inside its band.)
+
 Vertical relationships (adopted from Global Dream Light — consistent with what is already built, now made explicit for new pages):
 
 | Relationship | Distance |
@@ -141,6 +143,10 @@ New pages should test at 1440×900, 1024px, 768px and 375px, matching how the ho
 | Formula card | `.fcard` | Square image + label, used in the "Home + Business + Gia" scene. |
 | Chat widget | `.chat`, `.msg--you`, `.msg--gia`, `.msg--typing` | Example conversation with Gia (Section 5 of the home page). |
 | TBYB frame | `.tbyb__frame`, `.tbyb__progress` | Horizontal scroll track with numbered captioned frames. |
+| Chapter rail (How It Works) | `.hiw-toc` + `--rail` | Fixed left chapter list ≥1101px (content padded by `--rail`), compact "02 / 08" chip below; `.is-dark` inverts it over dark areas. |
+| Chapter opener | `.hiw-opener` | Full-screen photo pause: left veil, huge Cormorant number, heading revealed line by line (`--d`), slow zoom. |
+| Chapter head | `.hiw-head` | Big gold Cormorant number (lining figures) + eyebrow + `.h2`. |
+| Line icons | `.hiw-icon` + `<symbol>` sprite | 48×48, 1.5px stroke, `currentColor` (gold-ink on cream, cream on dark). |
 
 ### 7.1 Media rules (as built)
 
