@@ -289,12 +289,15 @@ html:not(.has-scenes) .liv-step:last-child .liv-step__label::after {
      card widens).
    ========================================================== */
 .liv-own {
+  --own-top: var(--section-y);
   position: relative;
-  padding: var(--section-y) 0;     /* bottom too: hard brown→paper edge into "When life changes" */
+  padding: var(--own-top) 0 var(--section-y); /* bottom too: hard brown→paper edge into "When life changes" */
   background: var(--gh-brown);
   color: var(--gh-cream);
 }
-.liv-rail--own { bottom: auto; height: calc(var(--section-y) - 28px); }
+/* after the pinned TBYB stage: its empty brown under the cards (--tbyb-tail, living.js) counts toward the gap */
+.has-scenes .liv-own { --own-top: max(0px, calc(var(--section-y) - var(--tbyb-tail, 0px))); }
+.liv-rail--own { bottom: auto; height: max(0px, calc(var(--own-top) - 28px)); }
 .liv-rail--own .liv-rail__in::before {
   -webkit-mask-image: linear-gradient(#000 55%, transparent);
   mask-image: linear-gradient(#000 55%, transparent);

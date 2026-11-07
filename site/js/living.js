@@ -154,6 +154,24 @@
       }
     });
     tl.to({}, { duration: .1 }); // hold the finished timeline before the pin releases
+
+    /* The pinned stage is one screen tall with its content centred, so empty brown stays
+       under the cards. "Two ways to own" subtracts it (--tbyb-tail) from its top padding:
+       content → next eyebrow stays one --section-y (DESIGN-SYSTEM §5), not two. */
+    const own = $("#ownership");
+    const stage = $(".liv-tbyb__stage", scene);
+    const grid = $(".liv-tbyb__grid", scene);
+    const tail = () => {
+      if (!own) return;
+      const t = stage.getBoundingClientRect().bottom - grid.getBoundingClientRect().bottom;
+      own.style.setProperty("--tbyb-tail", Math.max(0, Math.round(t)) + "px");
+    };
+    tail();
+    ScrollTrigger.addEventListener("refreshInit", tail);
+    return () => {
+      ScrollTrigger.removeEventListener("refreshInit", tail);
+      if (own) own.style.removeProperty("--tbyb-tail");
+    };
   }
 
   /* Two ways to own (a pause, no pin): the gold line from TBYB runs down beside the heading
@@ -266,11 +284,11 @@
   mm.add("(min-width: 769px) and (prefers-reduced-motion: no-preference)", () => {
     doc.classList.add("has-scenes");
     heroScene();
-    tbybScene();
+    const tbybOff = tbybScene() || (() => {});
     const giaOff = giaScene();
     doc.classList.remove("scenes-pending");
     ScrollTrigger.refresh();
-    return () => { giaOff(); doc.classList.remove("has-scenes"); };
+    return () => { tbybOff(); giaOff(); doc.classList.remove("has-scenes"); };
   });
   // the two ownership paths: only where the line stands at --tl-x beside the text (>=1101px)
   mm.add("(min-width: 1101px) and (prefers-reduced-motion: no-preference)", () => ownBranches());
