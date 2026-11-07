@@ -56,7 +56,7 @@ A "magazine in eight chapters". Page files: `css/how-it-works.css`, `js/how-it-w
 7. Privacy — copy + three icon labels
 8. The Whole System — opener, then scene: cut-out + five cards, closing line, CTA → `living-with-glonari.html`
 
-### 3. Living With Glonari — `site/living-with-glonari.html` — 🚧 hero + sections 1–6 built
+### 3. Living With Glonari — `site/living-with-glonari.html` — ✅ built (awaiting owner review)
 
 Page files: `css/living.css`, `js/living.js`. Pinned scenes (owner's decision, four): Hero, Try Before You Buy, Gia goes with you, The bigger idea.
 
@@ -69,7 +69,7 @@ Planned sections:
 4. When life changes (`#when-life-changes`, pause, paper) — self-playing stage (5 s per scenario): scenario buttons | stack of three 4:5 photo cards + Gia pill | Gia card with 4 steps lighting up; phones: stack + dots + status line, swipe ✅
 5. Gia goes with you (`#gia-goes-with-you`, scene, paper) — one room by a big window, four views behind the glass (City · Suburb · By the sea · Garden home), Gia's chat keeps its history; phones: room + chat below + 4 view cards ✅
 6. The journey before and after (`#journey-before-and-after`, pause, paper) — preview frame linking to Global Dream Journey™ + copy, two columns ≥1024px ✅
-7. The bigger idea (scene)
+7. The bigger idea (`#the-bigger-idea`, scene, dark) — night villa, five manifesto lines one at a time in gold Cormorant, gold dust (canvas), the night lightens, gold button → Find Your Home; static: all lines stacked ✅
 
 ### 4. Already Own a Home? — `site/already-own-a-home.html` — ⏳ stub only
 

@@ -1,6 +1,6 @@
 # Glonari Homes — Project Status
 
-Last updated: 2026-11-07. Update this file after every significant step so a new chat (on either computer) can resume without re-reading the whole conversation history. Keep entries short: decisions, what changed, open questions, next step — not a transcript.
+Last updated: 2026-11-08. Update this file after every significant step so a new chat (on either computer) can resume without re-reading the whole conversation history. Keep entries short: decisions, what changed, open questions, next step — not a transcript.
 
 ## Done
 
@@ -82,15 +82,18 @@ Last updated: 2026-11-07. Update this file after every significant step so a new
   - Footer: the "Global Dream Journey" link (all 6 pages, `site/partials/footer.html` + `python scripts/sync-partials.py`) now points to `https://helen369-gif1.github.io/global-dream-prototype/` (`target="_blank" rel="noopener"`), same as the in-page link and the preview frame. Closes the two footer-link open questions below.
   - Checked (headless Chrome) at 1440×900, 1024×768, 375×812: preview frame shows the arches/sea/chandelier crop with no portal or UI overlay, tone reads warm and calm next to the neighbouring sections, both links open the Global Dream Journey site in a new tab, footer link updated on all 6 pages, no console errors (favicon 404 only), no horizontal scroll. "Coming next" stub below now only mentions section 7.
   - Open: owner review.
+- **Living With Glonari — section 7 "The bigger idea" (`#the-bigger-idea`, 2026-11-08).** The fourth and last scene; replaces the `.liv-next` stub, last section before the footer. Dark (`--gh-brown`), reference Endel Manifesto. Copy verbatim (v2 Page 3 §7): headline, large line and the three copy sentences = five manifesto lines (Cormorant; the first two `--gp-gold`, larger; the rest `--gp-champagne`); eyebrow "07 · The bigger idea". ≥769px motion-safe (`ideaScene()` in `living.js`, `--travel: 420svh`): one screen pinned over the night villa, lines replace each other in the sky above the roof (in: opacity, y 40→0, blur 10→0; out: up + blur), the dark overlay goes 1→.3 and a warm radial glow rises from the bottom, then the gold `.btn` "Find My Glonari Home" (→ find-your-home.html; page-scoped gold fill `.liv-idea__btn`) comes in with autoAlpha. Gold dust: canvas (`ideaDust()`), ≤140 rising, twinkling specks, runs only while the scene is active, brighter with progress. Static (phones, reduced motion, no JS): all five lines stacked, button below, phone picture, no dust/glow. `.liv-journey` now has a bottom `--section-y` too (paper band before the hard paper→brown edge).
+  - Images: `living-07-night-villa.png` (2560×1440) → `living-07-night-villa-2560/-1600.webp`; `living-07-night-villa-mobile.png` (actually 941×1672, not 1080×1920 — not upscaled) → `-mobile-940/-720.webp`; WebP q 78. `<picture>`: desktop file at min-width 769px + no reduced motion, otherwise the phone file. Masters already in `masters/`.
+  - Checked (headless Chrome) at 1440×900, 1024×768, 375×812 + reduced motion at 1440: lines one at a time and readable, overlay thins, button visible and clickable at the end (hidden before), static layout correct, images load, no horizontal scroll, no console errors (favicon 404 only).
+  - Open: owner review in a real browser (the dust and the pacing).
 
 ## Not started
 
 Stub pages (shared header/footer + a one-line placeholder only), in the build order from `Glonari Homes — Website Architecture & Copy v2.docx`:
 
-1. Living With Glonari — section 7 "The bigger idea" (hero + sections 1–6 done, see above)
-2. Already Own a Home?
-3. Find Your Home
-4. FAQs
+1. Already Own a Home?
+2. Find Your Home
+3. FAQs
 
 See `SITE-STRUCTURE.md` for each page's planned sections.
 

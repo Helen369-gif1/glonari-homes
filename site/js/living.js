@@ -10,8 +10,9 @@
    "When life changes" — a self-playing 3-scenario stage, not scrubbed (lifeStage(), pure JS, no GSAP).
      3) "Gia goes with you" — four views behind one window, the chat
         keeps its history (giaScene()).
-   Planned (owner): "The bigger idea" — four scenes in total. Scrubbed timelines use fromTo only (from breaks
-   on refresh).
+     4) "The bigger idea" — the manifesto, one line at a time, gold dust,
+        the night lightens towards the button (ideaScene()).
+   Four scenes in total (owner). Scrubbed timelines use fromTo only (from breaks on refresh).
    ========================================================== */
 (() => {
   "use strict";
@@ -280,15 +281,105 @@
     };
   }
 
+  /* The bigger idea (Endel Manifesto): one screen pinned over the night villa. The five
+     manifesto lines replace each other (in: opacity, y 40→0, blur 10→0; out: up and blurred),
+     the dark overlay thins out and a warm glow rises from the windows towards the last line,
+     then the gold button comes in (autoAlpha, so it can't be clicked while hidden).
+     Gold dust: a canvas of slow rising, twinkling specks; it only runs while the scene is
+     on screen and gets a little brighter with the scroll (level 0→1). */
+  function ideaDust(canvas) {
+    const ctx = canvas.getContext("2d");
+    const sprite = document.createElement("canvas");
+    const S = 32;
+    sprite.width = sprite.height = S;
+    const sc = sprite.getContext("2d");
+    const g = sc.createRadialGradient(S / 2, S / 2, 0, S / 2, S / 2, S / 2);
+    g.addColorStop(0, "rgba(255, 226, 168, 1)");
+    g.addColorStop(.25, "rgba(242, 179, 90, .75)");
+    g.addColorStop(1, "rgba(242, 179, 90, 0)");
+    sc.fillStyle = g;
+    sc.fillRect(0, 0, S, S);
+
+    let w = 0, h = 0, dpr = 1, specks = [], raf = 0, level = 0, last = 0;
+    const rnd = (a, b) => a + Math.random() * (b - a);
+    const speck = (anyY) => ({
+      x: Math.random() * w, y: anyY ? Math.random() * h : h + 20 * dpr,
+      r: rnd(2.5, 9) * dpr, vy: rnd(6, 22) * dpr, sway: rnd(4, 16) * dpr,
+      ph: Math.random() * 6.28, tw: rnd(.6, 1.8), a: rnd(.25, .9),
+    });
+    const size = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = canvas.width = Math.round(canvas.clientWidth * dpr);
+      h = canvas.height = Math.round(canvas.clientHeight * dpr);
+      const n = Math.min(140, Math.round((canvas.clientWidth * canvas.clientHeight) / 11000));
+      specks = Array.from({ length: n }, () => speck(true));
+    };
+    const frame = (t) => {
+      const dt = Math.min(.05, (t - (last || t)) / 1000);
+      last = t;
+      ctx.clearRect(0, 0, w, h);
+      ctx.globalCompositeOperation = "lighter";
+      const k = .45 + .55 * level;
+      for (const p of specks) {
+        p.y -= p.vy * dt;
+        p.ph += p.tw * dt;
+        if (p.y < -20 * dpr) Object.assign(p, speck(false));
+        const x = p.x + Math.sin(p.ph) * p.sway;
+        ctx.globalAlpha = p.a * k * (.55 + .45 * Math.sin(p.ph * 2.3));
+        ctx.drawImage(sprite, x - p.r, p.y - p.r, p.r * 2, p.r * 2);
+      }
+      raf = requestAnimationFrame(frame);
+    };
+    const start = () => { if (!raf) { last = 0; raf = requestAnimationFrame(frame); } };
+    const stop = () => { cancelAnimationFrame(raf); raf = 0; };
+    size();
+    const ro = new ResizeObserver(size);
+    ro.observe(canvas);
+    return {
+      set level(v) { level = v; },
+      toggle: (on) => (on ? start() : stop()),
+      kill: () => { stop(); ro.disconnect(); ctx.clearRect(0, 0, w, h); },
+    };
+  }
+
+  function ideaScene() {
+    const scene = $('[data-scene="liv-idea"]');
+    if (!scene) return () => {};
+    const lines = $$(".liv-idea__line", scene);
+    const last = lines.length - 1;
+    const dust = ideaDust($(".liv-idea__dust", scene));
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        ...scrubTo(scene),
+        onToggle: (st) => dust.toggle(st.isActive),
+        onUpdate: (st) => { dust.level = st.progress; },
+      },
+      defaults: { ease: "none" },
+    });
+    tl.fromTo($(".liv-idea__dark", scene), { opacity: 1 }, { opacity: .3, duration: last + .4 }, 0)
+      .fromTo($(".liv-idea__glow", scene), { opacity: 0 }, { opacity: 1, duration: last + .4 }, 0);
+    lines.forEach((line, i) => {
+      if (i) tl.fromTo(line, { opacity: 0, y: 40, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: .35, ease: "power2.out" }, i - .1);
+      else tl.fromTo(line, { opacity: 1, y: 0, filter: "blur(0px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: .01 }, 0);
+      if (i < last) tl.fromTo(line, { opacity: 1, y: 0, filter: "blur(0px)" }, { opacity: 0, y: -40, filter: "blur(10px)", duration: .3, ease: "power1.in", immediateRender: false }, i + .6);
+    });
+    tl.fromTo($(".liv-idea__cta", scene), { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: .3, ease: "power2.out" }, last + .45)
+      .to({}, { duration: .5 }); // hold the last line and the button before the pin releases
+
+    return () => dust.kill();
+  }
+
   const mm = gsap.matchMedia();
   mm.add("(min-width: 769px) and (prefers-reduced-motion: no-preference)", () => {
     doc.classList.add("has-scenes");
     heroScene();
     const tbybOff = tbybScene() || (() => {});
     const giaOff = giaScene();
+    const ideaOff = ideaScene();
     doc.classList.remove("scenes-pending");
     ScrollTrigger.refresh();
-    return () => { tbybOff(); giaOff(); doc.classList.remove("has-scenes"); };
+    return () => { tbybOff(); giaOff(); ideaOff(); doc.classList.remove("has-scenes"); };
   });
   // the two ownership paths: only where the line stands at --tl-x beside the text (>=1101px)
   mm.add("(min-width: 1101px) and (prefers-reduced-motion: no-preference)", () => ownBranches());

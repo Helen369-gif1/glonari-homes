@@ -159,6 +159,7 @@ New pages should test at 1440×900, 1024px, 768px and 375px, matching how the ho
 | Chapter head | `.hiw-head` | Big gold Cormorant number (lining figures) + eyebrow + `.h2`. |
 | Gold line / timeline (Living) | `.liv-rail`, `--tl-x`, `.liv-step__card` | One 1px gold vertical (`--gp-gold-mid`) shared by Security and TBYB via `--tl-x` (share of the container width); starts at a 13px ring; in TBYB it becomes a step scale (mono labels left, cards right, travelling dot). Cards: outlined, or filled with the step colours + slight tilt. In "Two ways to own" the line splits into two SVG paths to the cards (≥1101px, motion-safe). |
 | Ownership duo (Living) | `.liv-own__duo`, `.liv-own__card` | The `.hiw-duo` two-card hover-widen pattern repeated on brown: card fill cream 5%, 1px cream 12% border, gold focus outline. |
+| Manifesto scene (Living) | `.liv-idea*` | Pinned dark stage: lines stacked in one grid cell replace each other on scroll, overlay thins, canvas gold dust; the page's main CTA as a gold `.btn` (`.liv-idea__btn`, `--gp-gold` fill, ink text). Static: lines stacked. |
 | Line icons | `.hiw-icon` + `<symbol>` sprite | 48×48, 1.5px stroke, `currentColor` (gold-ink on cream, cream on dark). |
 
 ### 7.1 Media rules (as built)

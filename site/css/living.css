@@ -673,7 +673,8 @@ html:not(.has-scenes) .liv-gia__place-i:not(:last-child) { display: none; }
    with you" before the dark closing manifesto). Preview frame links
    out to the owner's Global Dream Journey site (new tab).
    ========================================================== */
-.liv-journey { padding-top: var(--section-y); background: var(--gh-paper); }
+/* a paper band before the dark manifesto: one --section-y on each side of the hard edge */
+.liv-journey { padding-block: var(--section-y); background: var(--gh-paper); }
 .liv-journey__grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -709,8 +710,91 @@ html:not(.has-scenes) .liv-gia__place-i:not(:last-child) { display: none; }
 }
 
 /* ==========================================================
-   Placeholder below (until section 7 arrives).
-   Last section before the footer: top and bottom --section-y.
+   7 · The bigger idea — the fourth and last scene, dark, the last
+   section before the footer (reference: Endel Manifesto).
+   Default CSS = static: the night villa (phone picture), the whole
+   manifesto one line under another in gold Cormorant, the button
+   below, no dust or glow. .has-scenes (living.js, >=769px,
+   motion-safe): one screen pinned; the lines replace each other in
+   the sky above the villa, gold dust drifts (canvas), the dark
+   overlay thins out towards the last line, then the button.
    ========================================================== */
-.liv-next { padding-block: var(--section-y); background: var(--gh-paper); }
-.liv-next p:not(.eyebrow) { max-width: 640px; color: var(--gh-ink-2); }
+.liv-idea { background: var(--gh-brown); color: var(--gp-text); }
+.liv-idea__stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: var(--section-y) clamp(300px, 78vw, 560px);  /* the bottom shows the villa under the button */
+}
+.liv-idea__bg, .liv-idea__dark, .liv-idea__glow, .liv-idea__dust {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.liv-idea__bg img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: 50% 100%;
+}
+.liv-idea__dark {
+  background: linear-gradient(180deg, rgba(10, 7, 4, .72) 0%, rgba(10, 7, 4, .56) 55%, rgba(10, 7, 4, .12) 100%);
+}
+.liv-idea__glow, .liv-idea__dust { display: none; }
+
+.liv-idea__in { position: relative; text-align: center; }
+.liv-idea__eyebrow { margin: 0 0 clamp(40px, 6vw, 64px); }
+.liv-idea__lines {
+  display: grid;
+  gap: clamp(28px, 4vw, 48px);
+  max-width: 980px;
+  margin-inline: auto;
+}
+.liv-idea__line {
+  margin: 0;
+  font-family: var(--font-word);
+  font-weight: 500;
+  font-size: clamp(28px, 3.4vw, 52px);
+  line-height: 1.16;
+  color: var(--gp-champagne);
+  text-wrap: balance;
+  text-shadow: 0 2px 24px rgba(5, 4, 2, .55);
+}
+.liv-idea__line--big {
+  font-size: clamp(38px, 5.4vw, 86px);
+  line-height: 1.04;
+  color: var(--gp-gold);
+}
+.liv-idea__cta { margin-top: clamp(40px, 5vw, 56px); }
+/* the page's main call to action: the .btn pill in gold */
+.liv-idea__btn { background: var(--gp-gold); border-color: var(--gp-gold); color: var(--gh-ink); }
+.liv-idea__btn:hover { background: var(--gp-champagne); border-color: var(--gp-champagne); }
+
+/* ---- the scene ---- */
+.has-scenes .liv-idea__stage { padding: 0; }
+.has-scenes .liv-idea__bg img { object-position: 50% 85%; }
+.has-scenes .liv-idea__dark {
+  background: linear-gradient(180deg, rgba(10, 7, 4, .88) 0%, rgba(10, 7, 4, .74) 60%, rgba(10, 7, 4, .5) 100%);
+  will-change: opacity;
+}
+.has-scenes .liv-idea__glow {
+  display: block;
+  opacity: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(242, 179, 90, .34), rgba(242, 179, 90, 0) 70%);
+  mix-blend-mode: screen;
+}
+.has-scenes .liv-idea__dust { display: block; width: 100%; height: 100%; }
+.has-scenes .liv-idea__in {
+  position: absolute;
+  inset: var(--header-h) 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 32svh;                /* keep the lines in the sky, above the villa */
+}
+.has-scenes .liv-idea__eyebrow { position: absolute; top: 28px; left: 0; right: 0; margin: 0; }
+.has-scenes .liv-idea__lines { width: 100%; gap: 0; }
+.has-scenes .liv-idea__line { grid-area: 1 / 1; align-self: center; will-change: transform, opacity, filter; }
