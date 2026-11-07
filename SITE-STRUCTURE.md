@@ -8,7 +8,7 @@ Page list, navigation, and per-page sections. Approved English copy for each sec
 - **Header CTA** (always visible, not in the nav list): Find My Glonari Home → `find-your-home.html`
 - **Footer columns:**
   - *Explore* — How It Works, Living With Glonari, Already Own a Home?, Find Your Home, FAQs
-  - *Glonari* — About Glonari, Global Dream Journey, Member Qualification, Contact, Member Login (all still `#` — not finalized, see `PROJECT-STATUS.md`)
+  - *Glonari* — About Glonari, Global Dream Journey (→ external site, new tab), Member Qualification, Contact, Member Login (the rest still `#` — not finalized, see `PROJECT-STATUS.md`)
   - *Legal* — Privacy & Your Data, Legal & Disclosures (both still `#`)
 - **Footer disclosure** (verbatim, every page): *"All figures are illustrative. Glonari Homes is in development and terms may change. Home Business results are not guaranteed, are not passive income and depend on member participation and program terms. GLO is a membership and access credential, not rent, a property interest or a source of income. This site is not an offer to sell, lease or finance any property. Glonari is not a bank."*
 
@@ -56,7 +56,7 @@ A "magazine in eight chapters". Page files: `css/how-it-works.css`, `js/how-it-w
 7. Privacy — copy + three icon labels
 8. The Whole System — opener, then scene: cut-out + five cards, closing line, CTA → `living-with-glonari.html`
 
-### 3. Living With Glonari — `site/living-with-glonari.html` — 🚧 hero + sections 1–5 built
+### 3. Living With Glonari — `site/living-with-glonari.html` — 🚧 hero + sections 1–6 built
 
 Page files: `css/living.css`, `js/living.js`. Pinned scenes (owner's decision, four): Hero, Try Before You Buy, Gia goes with you, The bigger idea.
 
@@ -68,7 +68,7 @@ Planned sections:
 3. Two ways to own (`#ownership`, linked from the home page; pause, dark — continues TBYB) — two hover-widen cards, the gold line splits into two paths, closing line ✅
 4. When life changes (`#when-life-changes`, pause, paper) — self-playing stage (5 s per scenario): scenario buttons | stack of three 4:5 photo cards + Gia pill | Gia card with 4 steps lighting up; phones: stack + dots + status line, swipe ✅
 5. Gia goes with you (`#gia-goes-with-you`, scene, paper) — one room by a big window, four views behind the glass (City · Suburb · By the sea · Garden home), Gia's chat keeps its history; phones: room + chat below + 4 view cards ✅
-6. The journey before and after
+6. The journey before and after (`#journey-before-and-after`, pause, paper) — preview frame linking to Global Dream Journey™ + copy, two columns ≥1024px ✅
 7. The bigger idea (scene)
 
 ### 4. Already Own a Home? — `site/already-own-a-home.html` — ⏳ stub only

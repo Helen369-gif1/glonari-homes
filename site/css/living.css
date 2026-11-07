@@ -668,7 +668,48 @@ html:not(.has-scenes) .liv-gia__place-i:not(:last-child) { display: none; }
 }
 
 /* ==========================================================
-   Placeholder below (until the next sections arrive).
+   6 · The journey before and after — a calm pause on paper, no
+   pin, just the usual data-reveal (the quiet beat after "Gia goes
+   with you" before the dark closing manifesto). Preview frame links
+   out to the owner's Global Dream Journey site (new tab).
+   ========================================================== */
+.liv-journey { padding-top: var(--section-y); background: var(--gh-paper); }
+.liv-journey__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 48px clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+.liv-journey__visual { margin: 0; }
+.liv-journey__frame {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--gh-line);
+}
+.liv-journey__frame img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  transition: transform .6s var(--ease);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .liv-journey__frame:hover img { transform: scale(1.03); }
+}
+.liv-journey__cap {
+  margin: 14px 2px 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gh-gold-ink);
+}
+.liv-journey__text > p:not(.eyebrow) { color: var(--gh-ink-2); max-width: 460px; }
+
+@media (max-width: 1023px) {
+  .liv-journey__grid { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================
+   Placeholder below (until section 7 arrives).
    Last section before the footer: top and bottom --section-y.
    ========================================================== */
 .liv-next { padding-block: var(--section-y); background: var(--gh-paper); }
