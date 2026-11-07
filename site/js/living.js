@@ -258,14 +258,19 @@
     ScrollTrigger.addEventListener("refreshInit", fit);
 
     const tl = gsap.timeline({ scrollTrigger: scrubTo(scene), defaults: { ease: "none" } });
-    tl.fromTo($(".liv-gia__zoom", scene), { scale: 1 }, { scale: 1.03, duration: 4.4 }, 0);
+    tl.fromTo($(".liv-gia__zoom", scene), { scale: 1 }, { scale: 1.04, duration: 4.4 }, 0);
     items.forEach((item, i) => {
       const typing = $(".msg--typing", item);
       const msg = $(".msg--gia", item);
-      tl.fromTo(views[i], { opacity: i ? 0 : 1, scale: 1.06 }, { opacity: 1, scale: 1, duration: .5, ease: "power1.out" }, i);
+      // the view change is the scene's main beat: a long, soft cross-fade; the new view
+      // settles from a closer, slightly shifted framing while the old one drifts the other way
+      tl.fromTo(views[i], { opacity: i ? 0 : 1, scale: 1.16, xPercent: 2.5 },
+        { opacity: 1, scale: 1, xPercent: 0, duration: .85, ease: "sine.inOut" }, i);
       if (i) {
-        tl.fromTo(places[i - 1], { opacity: 1 }, { opacity: 0, duration: .12, immediateRender: false }, i + .04)
-          .fromTo(places[i], { opacity: 0 }, { opacity: 1, duration: .12 }, i + .14)
+        tl.fromTo(views[i - 1], { scale: 1, xPercent: 0 },
+          { scale: 1.05, xPercent: -2, duration: .85, ease: "sine.inOut", immediateRender: false }, i)
+          .fromTo(places[i - 1], { opacity: 1 }, { opacity: 0, duration: .12, immediateRender: false }, i + .22)
+          .fromTo(places[i], { opacity: 0 }, { opacity: 1, duration: .12 }, i + .32)
           .fromTo(list, { y: () => yAt(i - 1) }, { y: () => yAt(i), duration: .15, immediateRender: false }, i + .3);
       }
       if (i >= SHOW) tl.fromTo(items[i - SHOW], { opacity: 1 }, { opacity: 0, duration: .12, immediateRender: false }, i + .3);

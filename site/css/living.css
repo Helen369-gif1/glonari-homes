@@ -575,8 +575,8 @@ html:not(.has-scenes) .liv-step:last-child .liv-step__label::after {
 .liv-gia__zoom { position: absolute; inset: 0; transform-origin: 50% 45%; will-change: transform; }
 /* the views are a little larger than the frame, so their own zoom never opens a gap */
 .liv-gia__view {
-  position: absolute; top: -3%; left: -3%;
-  width: 106%; height: 106%; max-width: none;
+  position: absolute; top: -4%; left: -4%;
+  width: 108%; height: 108%; max-width: none;
   object-fit: cover;
   will-change: transform, opacity;
 }
@@ -632,21 +632,43 @@ html:not(.has-scenes) .liv-gia__place-i:not(:last-child) { display: none; }
   color: var(--gh-gold-ink);
 }
 
-/* pinned: one screen; the frame as large as the height allows */
+/* pinned: the room fills the screen (owner: "you're in the room", not a photo card),
+   with the same thin 12px margin on all four sides. --gia-fh = the height under the
+   header minus the margins; --gia-fw = the stage width (cqw) minus the margins, capped
+   at 1.15 × 16:9 so very wide screens don't lose the top of the window. The image is
+   cover-fitted: --gia-rw/--gia-rh is its rendered size; the place chip follows the glass
+   (x 14%, y 6% of the image) through it. The chat is pinned to the stage at a fixed
+   offset from the frame's top-right corner and a fixed width, so it doesn't scale. */
 .has-scenes .liv-gia__stage {
+  --gia-gap: 12px;
+  container-type: inline-size;
   display: flex; align-items: center;
-  padding: calc(var(--header-h) + 24px) 0 24px;
+  padding: calc(var(--header-h) + var(--gia-gap)) 0 var(--gia-gap);
 }
-.has-scenes .liv-gia__stage > .container { width: min(100%, calc(var(--container) + 2 * var(--page-pad))); }
-.has-scenes .liv-gia__box { width: min(100%, calc((100svh - var(--header-h) - 48px) * 16 / 9)); margin-inline: auto; }
+.has-scenes .liv-gia__stage > .container {
+  --gia-fh: calc(100svh - var(--header-h) - 2 * var(--gia-gap));
+  --gia-iw: calc(var(--gia-fh) * 16 / 9);
+  --gia-fw: min(100cqw - 2 * var(--gia-gap), var(--gia-iw) * 1.15);
+  --gia-rw: max(var(--gia-fw), var(--gia-iw));
+  --gia-rh: calc(var(--gia-rw) * 9 / 16);
+  width: 100%; max-width: none; padding-inline: 0;
+}
+.has-scenes .liv-gia__box { position: static; width: var(--gia-fw); margin-inline: auto; }
+.has-scenes .liv-gia__frame { width: var(--gia-fw); height: var(--gia-fh); aspect-ratio: auto; border-radius: 4px; }
+.has-scenes .liv-gia__place {
+  left: calc((var(--gia-fw) - var(--gia-rw)) / 2 + var(--gia-rw) * .14 + 20px);
+  top: max(20px, calc((var(--gia-fh) - var(--gia-rh)) / 2 + var(--gia-rh) * .06 + 20px));
+}
 .has-scenes .liv-gia .scene { margin-top: 0; }   /* the stage's own header clearance is the gap */
 .has-scenes .liv-gia__places { display: none; }
 .has-scenes .liv-gia__chat {
   position: absolute; z-index: 3;
-  top: 7%; right: 3.5%;
-  width: clamp(270px, 28%, 340px);
+  top: calc(var(--header-h) + var(--gia-gap) + 32px);
+  right: calc((100% - var(--gia-fw)) / 2 + 32px);
+  width: 340px;
   margin: 0;
 }
+@media (max-width: 1100px) { .has-scenes .liv-gia__chat { width: 300px; } }
 /* 12px band at the top for the fade, so a bubble in view is never cut by it */
 .has-scenes .liv-gia__chat .chat__head { margin-bottom: 2px; }
 .has-scenes .liv-gia__body {
