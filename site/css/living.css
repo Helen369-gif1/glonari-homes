@@ -518,7 +518,20 @@ html:not(.has-scenes) .liv-step:last-child .liv-step__label::after {
 
 /* ≥1024px: tabs | stack | Gia */
 @media (min-width: 1024px) {
-  .liv-stage.is-on { grid-template-columns: minmax(170px, 240px) auto minmax(200px, 280px); justify-content: space-between; }
+  /* larger composition on desktop (owner, 2026-11-08): bigger cards, tabs, pill and Gia's card */
+  .liv-stage { --card: clamp(230px, 25vw, 380px); }
+  .liv-stage.is-on { grid-template-columns: minmax(190px, 270px) auto minmax(220px, 310px); justify-content: space-between; }
+  .liv-stage.is-on .liv-tab { padding: 18px 22px 20px; font-size: 18px; }
+  .liv-pc figcaption { height: 58px; font-size: 13.5px; }
+  .liv-stage.is-on .liv-stage__stack { height: calc((var(--card) - 20px) * 1.25 + 20px + 58px); }
+  .liv-stage.is-on .liv-pill { max-width: 210px; }
+  .liv-pill__in { font-size: 15px; padding: 9px 20px 9px 9px; }
+  .liv-pill__in img { width: 34px; height: 34px; }
+  .liv-gcard { padding: 28px 28px 30px; max-width: 360px; }
+  .liv-gcard__h { margin-bottom: 20px; font-size: 13px; }
+  .liv-gcard__steps { gap: 18px; }
+  .liv-gcard__steps li { padding-left: 32px; font-size: 18px; }
+  .liv-gcard__dot { top: 5px; width: 16px; height: 16px; }
 }
 /* 769–1023px: tabs become a row on top, stack and Gia side by side */
 @media (min-width: 769px) and (max-width: 1023px) {
