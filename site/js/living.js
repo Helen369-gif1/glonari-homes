@@ -7,7 +7,7 @@
      2) Try Before You Buy — the gold line becomes a timeline.
    Not a scene: "Two ways to own" — the line splits into two paths
    drawn on scroll (ownBranches(), >=1101px, motion-safe);
-   "When life changes" — the line draws the 4-step flow (lifeFlow()).
+   "When life changes" — a self-playing 3-scenario stage, not scrubbed (lifeStage(), pure JS, no GSAP).
      3) "Gia goes with you" — four views behind one window, the chat
         keeps its history (giaScene()).
    Planned (owner): "The bigger idea" — four scenes in total. Scrubbed timelines use fromTo only (from breaks
@@ -18,6 +18,84 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const doc = document.documentElement;
+
+  /* When life changes (a pause, no pin, no GSAP): three scenarios play in turn.
+     The end of the active timer bar (CSS animation `life-timer`, length --life-ms) advances the
+     scene; steps, pill and timer all restart with .is-run, so CSS is the single clock.
+     .is-paused (CSS) freezes every animation: off screen, and only while a finger is down (no hover pause).
+     Reduced motion: no autoplay, no movement — manual switching only (instant).
+     Without JS the CSS shows scene 1 complete (this function adds .is-on). */
+  const LIFE_SCENE_MS = 4000; // how long one scenario is shown
+  function lifeStage() {
+    const stage = $("[data-life-stage]");
+    if (!stage) return;
+    const cards = $$(".liv-pc", stage);
+    const tabs = $$(".liv-tab", stage);
+    const dots = $$(".liv-dot", stage);
+    const pill = $(".liv-pill", stage);
+    const pillText = $(".liv-pill__t", stage);
+    const status = $(".liv-stage__status", stage);
+    const n = cards.length;
+    const rm = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const hold = new Set(["view"]); // reasons to pause (no hover); "view" is lifted once the stage is on screen
+    let cur = 0;
+
+    const sync = () => stage.classList.toggle("is-paused", hold.size > 0);
+    const restart = () => {
+      stage.classList.remove("is-run"); pill.classList.remove("is-run");
+      if (rm.matches) return;
+      void stage.offsetWidth; // let the animations reset
+      stage.classList.add("is-run"); pill.classList.add("is-run");
+    };
+    const go = (i) => {
+      cur = ((i % n) + n) % n;
+      cards.forEach((c, k) => {
+        const d = (k - cur + n) % n, was = c.dataset.pos;
+        c.dataset.pos = d === 0 ? 0 : d === 1 ? 1 : -1;
+        // a card crossing from one back position to the other passes behind the stack
+        if (!rm.matches && was && was !== "0" && c.dataset.pos !== "0" && was !== c.dataset.pos) {
+          c.classList.add("is-wrap"); setTimeout(() => c.classList.remove("is-wrap"), 900);
+        }
+      });
+      [tabs, dots].forEach((list) => list.forEach((b, k) => (k === cur ? b.setAttribute("aria-current", "true") : b.removeAttribute("aria-current"))));
+      const text = cards[cur].dataset.gia;
+      pillText.textContent = text; status.textContent = text;
+      restart();
+    };
+
+    stage.style.setProperty("--life-ms", LIFE_SCENE_MS + "ms");
+    stage.dataset.motion = rm.matches ? "off" : "on";
+    stage.classList.add("is-on");
+    sync();
+    restart();
+    rm.addEventListener("change", () => { stage.dataset.motion = rm.matches ? "off" : "on"; restart(); });
+
+    stage.addEventListener("animationend", (e) => {
+      if (e.animationName === "life-timer" && e.target.offsetParent) go(cur + 1);
+    });
+    [...tabs, ...dots].forEach((b) => b.addEventListener("click", () => go(+b.dataset.i)));
+
+    const toggle = (why, on) => { on ? hold.add(why) : hold.delete(why); sync(); };
+    stage.addEventListener("touchstart", () => toggle("touch", true), { passive: true });
+    stage.addEventListener("touchend", () => { toggle("touch", false); restart(); }, { passive: true }); // after a touch the cycle starts the scene afresh
+    stage.addEventListener("touchcancel", () => toggle("touch", false), { passive: true });
+
+    // swipe on the photo stack
+    const stack = $(".liv-stage__stack", stage);
+    let x0 = null, y0 = 0;
+    stack.addEventListener("touchstart", (e) => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    stack.addEventListener("touchend", (e) => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+      x0 = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) go(cur + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([en]) => toggle("view", !en.isIntersecting), { threshold: .3 }).observe(stage);
+    } else toggle("view", false);
+  }
+  lifeStage(); // before the GSAP guard below: needs no GSAP
 
   if (!window.gsap || !window.ScrollTrigger) { doc.classList.remove("scenes-pending"); return; }
   gsap.registerPlugin(ScrollTrigger);
@@ -132,41 +210,6 @@
     };
   }
 
-  /* When life changes: the three photo cards come in one after another with the scroll
-     (rise 80px + fade + scale .94→1, each over its own third of the range; caption follows). */
-  function lifeCards() {
-    const grid = $(".liv-life__grid");
-    if (!grid) return;
-    const items = $$(":scope > li", grid);
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: grid, start: "top 88%", end: "bottom 70%", scrub: .6, invalidateOnRefresh: true },
-      defaults: { ease: "power2.out" },
-    });
-    items.forEach((li, i) => {
-      tl.fromTo(li, { opacity: 0, y: 80, scale: .94 }, { opacity: 1, y: 0, scale: 1, duration: 1 }, i * .7)
-        .fromTo($("figcaption", li), { opacity: 0 }, { opacity: 1, duration: .5 }, i * .7 + .6);
-    });
-  }
-
-  /* When life changes (a pause, no pin): the gold line draws left→right across the container;
-     each ring and its label come in when the line reaches the ring (ring centres sit at
-     12.5 / 37.5 / 62.5 / 87.5% of the width — four equal columns). */
-  function lifeFlow() {
-    const flow = $(".liv-flow");
-    if (!flow) return;
-    const steps = $$(".liv-flow__step", flow);
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: flow, start: "top 80%", end: "top 40%", scrub: .6, invalidateOnRefresh: true },
-      defaults: { ease: "none" },
-    });
-    tl.fromTo($(".liv-flow__line", flow), { scaleX: 0 }, { scaleX: 1, duration: 1 }, 0);
-    steps.forEach((step, i) => {
-      const t = Math.max(0, (i + .5) / steps.length - .04);
-      tl.fromTo($(".liv-flow__dot", step), { opacity: 0, scale: .4 }, { opacity: 1, scale: 1, duration: .08 }, t)
-        .fromTo($(".liv-flow__t", step), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .12 }, t + .02);
-    });
-  }
-
   /* Gia goes with you: the room stays, the view behind the glass changes four times
      (city → suburb → sea → garden; each new view fades in over the last, scale 1.06→1),
      the place label follows, and for each place Gia types (the home page's three dots)
@@ -224,8 +267,6 @@
     doc.classList.add("has-scenes");
     heroScene();
     tbybScene();
-    lifeCards();
-    lifeFlow();
     const giaOff = giaScene();
     doc.classList.remove("scenes-pending");
     ScrollTrigger.refresh();

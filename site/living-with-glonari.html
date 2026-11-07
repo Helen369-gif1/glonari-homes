@@ -207,46 +207,55 @@
         <p class="liv-life__copy">A new baby. Children moving out. A new job in another city. You&rsquo;re not locked into one address. When your life changes, you can ask to move to another Glonari Home that fits better, subject to availability and program terms.</p>
       </div>
 
-      <ul class="liv-life__grid">
-        <li data-reveal>
-          <figure class="liv-life__card">
-            <img src="assets/images/living-04-new-baby-800.webp"
-                 srcset="assets/images/living-04-new-baby-800.webp 800w, assets/images/living-04-new-baby-1200.webp 1200w"
-                 sizes="(min-width: 641px) 33vw, 100vw" width="1200" height="1200" loading="lazy"
-                 alt="A young couple on a garden sofa at sunset, the mother holding their newborn wrapped in a knitted blanket">
-            <figcaption>A new baby.</figcaption>
-          </figure>
-        </li>
-        <li data-reveal style="--d: 1">
-          <figure class="liv-life__card">
-            <img src="assets/images/living-04-leaving-home-800.webp"
-                 srcset="assets/images/living-04-leaving-home-800.webp 800w, assets/images/living-04-leaving-home-1200.webp 1200w"
-                 sizes="(min-width: 641px) 33vw, 100vw" width="1200" height="1200" loading="lazy"
-                 alt="Parents saying goodbye to their teenage son at the front door, his backpack on and a suitcase beside him">
-            <figcaption>Children moving out.</figcaption>
-          </figure>
-        </li>
-        <li data-reveal style="--d: 2">
-          <figure class="liv-life__card">
-            <img src="assets/images/living-04-new-job-800.webp"
-                 srcset="assets/images/living-04-new-job-800.webp 800w, assets/images/living-04-new-job-1200.webp 1200w"
-                 sizes="(min-width: 641px) 33vw, 100vw" width="1200" height="1200" loading="lazy"
-                 alt="A young woman smiling as she packs folded sweaters and a plant into a moving box outside her home, a suitcase behind her">
-            <figcaption>A new job in another city.</figcaption>
-          </figure>
-        </li>
-      </ul>
+      <div class="liv-stage" data-life-stage>
+        <ul class="liv-stage__tabs" aria-label="Life changes">
+          <li><button type="button" class="liv-tab" data-i="0" aria-current="true"><span class="liv-tab__t">A new baby</span><span class="liv-tab__bar" aria-hidden="true"></span></button></li>
+          <li><button type="button" class="liv-tab" data-i="1"><span class="liv-tab__t">Children moving out</span><span class="liv-tab__bar" aria-hidden="true"></span></button></li>
+          <li><button type="button" class="liv-tab" data-i="2"><span class="liv-tab__t">A new job in another city</span><span class="liv-tab__bar" aria-hidden="true"></span></button></li>
+        </ul>
 
-      <div class="liv-flow" data-reveal>
-        <span class="liv-flow__line" aria-hidden="true"></span>
-        <ol class="liv-flow__steps">
-          <li class="liv-flow__step"><span class="liv-flow__dot" aria-hidden="true"></span><span class="liv-flow__t">Current home</span></li>
-          <li class="liv-flow__step"><span class="liv-flow__dot" aria-hidden="true"></span><span class="liv-flow__t">Tell Gia what changed</span></li>
-          <li class="liv-flow__step"><span class="liv-flow__dot" aria-hidden="true"></span><span class="liv-flow__t">Gia finds your next match</span></li>
-          <li class="liv-flow__step liv-flow__step--end"><span class="liv-flow__dot" aria-hidden="true"></span><span class="liv-flow__t">Your next Glonari Home</span></li>
-        </ol>
-      </div>
-    </div>
+        <div class="liv-stage__stack">
+          <figure class="liv-pc" data-pos="0" data-gia="Gia: looking for a bigger home">
+            <div class="liv-pc__in"><img src="assets/images/living-04-new-baby-800.webp"
+                 srcset="assets/images/living-04-new-baby-800.webp 800w, assets/images/living-04-new-baby-1200.webp 1200w"
+                 sizes="(min-width: 769px) 320px, 80vw" width="1200" height="1200" loading="lazy" style="object-position: 40% 50%"
+                 alt="A young couple on a garden sofa at sunset, the mother holding their newborn wrapped in a knitted blanket">
+            <figcaption>A new baby.</figcaption></div>
+          </figure>
+          <figure class="liv-pc" data-pos="1" data-gia="Gia: looking for a smaller home">
+            <div class="liv-pc__in"><img src="assets/images/living-04-leaving-home-800.webp"
+                 srcset="assets/images/living-04-leaving-home-800.webp 800w, assets/images/living-04-leaving-home-1200.webp 1200w"
+                 sizes="(min-width: 769px) 320px, 80vw" width="1200" height="1200" loading="lazy" style="object-position: 28% 50%"
+                 alt="Parents saying goodbye to their teenage son at the front door, his backpack on and a suitcase beside him">
+            <figcaption>Children moving out.</figcaption></div>
+          </figure>
+          <figure class="liv-pc" data-pos="-1" data-gia="Gia: looking for a home in your new city">
+            <div class="liv-pc__in"><img src="assets/images/living-04-new-job-800.webp"
+                 srcset="assets/images/living-04-new-job-800.webp 800w, assets/images/living-04-new-job-1200.webp 1200w"
+                 sizes="(min-width: 769px) 320px, 80vw" width="1200" height="1200" loading="lazy" style="object-position: 45% 50%"
+                 alt="A young woman smiling as she packs folded sweaters and a plant into a moving box outside her home, a suitcase behind her">
+            <figcaption>A new job in another city.</figcaption></div>
+          </figure>
+          <p class="liv-pill" aria-live="polite"><span class="liv-pill__in"><img src="assets/images/gia-avatar-256.webp" width="256" height="256" alt=""><span class="liv-pill__t">Gia: looking for a bigger home</span></span></p>
+        </div>
+
+        <aside class="liv-gcard" aria-label="What Gia does when your life changes">
+          <p class="liv-gcard__h">Gia</p>
+          <ol class="liv-gcard__steps">
+            <li><span class="liv-gcard__dot" aria-hidden="true"></span>Current home</li>
+            <li><span class="liv-gcard__dot" aria-hidden="true"></span>Tell Gia what changed</li>
+            <li><span class="liv-gcard__dot" aria-hidden="true"></span>Gia finds your next match</li>
+            <li><span class="liv-gcard__dot" aria-hidden="true"></span>Your next Glonari Home</li>
+          </ol>
+        </aside>
+
+        <div class="liv-stage__dots" aria-label="Choose a scenario">
+          <button type="button" class="liv-dot" data-i="0" aria-label="A new baby" aria-current="true"><span class="liv-dot__bar" aria-hidden="true"></span></button>
+          <button type="button" class="liv-dot" data-i="1" aria-label="Children moving out"><span class="liv-dot__bar" aria-hidden="true"></span></button>
+          <button type="button" class="liv-dot" data-i="2" aria-label="A new job in another city"><span class="liv-dot__bar" aria-hidden="true"></span></button>
+        </div>
+        <p class="liv-stage__status" aria-live="polite">Gia: looking for a bigger home</p>
+      </div>    </div>
   </section>
 
   <!-- ============ 5 · Gia goes with you (scene, paper): one room, four views, one chat that keeps its history ============ -->
