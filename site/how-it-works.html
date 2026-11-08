@@ -159,17 +159,26 @@
 
   <!-- ============ 02 · Where the value comes from (opener = pause) ============ -->
   <section class="hiw-ch hiw-ch--opened" id="ch-02" aria-labelledby="ch-02-title">
-    <div class="hiw-opener" data-opener>
-      <img class="hiw-opener__img" src="assets/images/how-00-market-cards-1600.webp"
-           srcset="assets/images/how-00-market-cards-1600.webp 1600w, assets/images/how-00-market-cards-2560.webp 2560w"
-           sizes="100vw" width="2560" height="1440" loading="lazy"
-           alt="People relax and talk over coffee at an outdoor caf&eacute; on a hillside terrace at sunset, representing Glonari's Global Connections network">
+    <!-- pinned on wide screens (layeredScene() in how-it-works.js); phones: the plain parallax opener -->
+    <div class="scene hiw-layered" data-scene="hiw-cafe" style="--travel: 140svh">
+    <div class="scene__stage">
+    <div class="hiw-opener hiw-opener--layered hiw-opener--cafe" data-opener>
+      <!-- two layers in one frame (parallax like the first screen): the terrace, then the three friends in front -->
+      <img class="hiw-opener__img hiw-opener__bg" src="assets/images/how-02-cafe-bg-1600.webp"
+           srcset="assets/images/how-02-cafe-bg-1600.webp 1600w, assets/images/how-02-cafe-bg-2000.webp 2000w"
+           sizes="max(100vw, 177.8svh)" width="2000" height="1126" loading="lazy" alt="">
+      <img class="hiw-opener__img hiw-opener__fg" src="assets/images/how-02-cafe-people-cutout-1600.webp"
+           srcset="assets/images/how-02-cafe-people-cutout-1600.webp 1600w, assets/images/how-02-cafe-people-cutout-2000.webp 2000w"
+           sizes="max(100vw, 177.8svh)" width="2000" height="1126" loading="lazy"
+           alt="Three friends talk over coffee at an outdoor caf&eacute; on a hillside terrace at sunset, representing Glonari's Global Connections network">
       <div class="hiw-opener__veil" aria-hidden="true"></div>
       <div class="container hiw-opener__copy">
         <p class="hiw-opener__n" aria-hidden="true" data-reveal style="--d:0">02</p>
         <p class="eyebrow eyebrow--light" data-reveal style="--d:1">Chapter 02 &middot; Where the value comes from</p>
         <h2 class="h2 hiw-opener__title" id="ch-02-title"><span data-reveal style="--d:2">The Money Comes From Real Activity.</span> <span data-reveal style="--d:3">Not From Living in the House.</span></h2>
       </div>
+    </div>
+    </div>
     </div>
     <div class="container hiw-after">
       <p class="lead hiw-intro" data-reveal>Your Home Business earns from real commercial relationships, coordinated through Global Connections. Because Glonari works with thousands of homes, it can negotiate deals that no single family could get on its own.</p>
@@ -402,10 +411,17 @@
 
   <!-- ============ 08 · The whole system (opener + scene) ============ -->
   <section class="hiw-ch hiw-ch--opened hiw-system" id="ch-08" aria-labelledby="ch-08-title">
-    <div class="hiw-opener" data-opener>
-      <img class="hiw-opener__img hiw-opener__img--system" src="assets/images/how-00-system-circle-1600.webp"
-           srcset="assets/images/how-00-system-circle-1600.webp 1600w, assets/images/how-00-system-circle-2560.webp 2560w"
-           sizes="100vw" width="2560" height="1440" loading="lazy"
+    <!-- pinned on wide screens (layeredScene() in how-it-works.js); phones: the plain parallax opener -->
+    <div class="scene hiw-layered" data-scene="hiw-family" style="--travel: 140svh">
+    <div class="scene__stage">
+    <div class="hiw-opener hiw-opener--layered hiw-opener--family" data-opener>
+      <!-- two layers in one frame: the terrace, then the family at the table in front -->
+      <img class="hiw-opener__img hiw-opener__bg" src="assets/images/how-08-terrace-bg-1600.webp"
+           srcset="assets/images/how-08-terrace-bg-1600.webp 1600w, assets/images/how-08-terrace-bg-2000.webp 2000w"
+           sizes="max(100vw, 177.8svh)" width="2000" height="1126" loading="lazy" alt="">
+      <img class="hiw-opener__img hiw-opener__fg" src="assets/images/how-08-terrace-family-1600.webp"
+           srcset="assets/images/how-08-terrace-family-1600.webp 1600w, assets/images/how-08-terrace-family-2000.webp 2000w"
+           sizes="max(100vw, 177.8svh)" width="2000" height="1126" loading="lazy"
            alt="A family and a friend laugh together over dinner at an outdoor table by their home at sunset">
       <div class="hiw-opener__veil" aria-hidden="true"></div>
       <div class="container hiw-opener__copy">
@@ -413,6 +429,8 @@
         <p class="eyebrow eyebrow--light" data-reveal style="--d:1">Chapter 08</p>
         <h2 class="h2 hiw-opener__title" id="ch-08-title"><span data-reveal style="--d:2">The Whole System</span></h2>
       </div>
+    </div>
+    </div>
     </div>
 
     <div class="scene" data-scene="hiw-system" style="--travel: 170svh">

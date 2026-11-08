@@ -276,12 +276,30 @@ html:not(.has-scenes) .hiw-hero__cue { display: none; }
 .hiw-opener__title { max-width: 760px; margin-bottom: 0; text-shadow: 0 2px 30px rgba(5, 4, 2, .35); }
 .hiw-opener__title > span { display: block; }
 .hiw-opener__img--system { object-position: 44% 50%; }
+/* 02: two layers, pixel-aligned (same box, fit and position); the zoom of both grows around
+   the foot of the table (--po), so the people stay seated on the terrace while they come
+   closer faster than the background (openers() in how-it-works.js) */
+.hiw-opener--layered .hiw-opener__bg { z-index: -3; transform-origin: var(--po); }
+.hiw-opener--layered .hiw-opener__fg { z-index: -2; transform-origin: var(--po); }
+.hiw-opener--cafe { --po: 74% 100%; }
+.hiw-opener--cafe .hiw-opener__img { object-position: 80% 50%; }     /* the man on the right stays in frame */
+.hiw-opener--family { --po: 52% 25%; }   /* zoom around the faces: the heads stay clear of the header, the table grows down */
+.hiw-opener--family .hiw-opener__img { object-position: 44% 50%; }
+/* pinned (.has-scenes): the opener fills the sticky stage; the copy is driven by layeredScene(),
+   so the shared scroll reveal stands aside there */
+.has-scenes .hiw-layered .hiw-opener { height: 100%; min-height: 0; }
+.js.has-scenes .hiw-layered [data-reveal] { opacity: 1; transform: none; transition: none; }
+.scenes-pending .hiw-layered .hiw-opener__copy > * { opacity: 0; }
 
 @media (max-width: 768px) {
   .hiw-opener { min-height: 92svh; }
   .hiw-opener__img { object-position: 74% 50%; }
   .hiw-opener--night .hiw-opener__img { object-position: 60% 50%; }
   .hiw-opener__img--system { object-position: 58% 40%; } /* the woman at the head of the table stays in frame */
+  .hiw-opener--cafe { --po: 80% 100%; }
+  .hiw-opener--cafe .hiw-opener__img { object-position: 74% 50%; }
+  .hiw-opener--family { --po: 45% 25%; }
+  .hiw-opener--family .hiw-opener__img { object-position: 58% 40%; } /* the woman at the head of the table stays in frame */
   .hiw-opener__veil, .hiw-opener--night .hiw-opener__veil {
     background: linear-gradient(0deg, rgba(20, 14, 10, .8) 0%, rgba(20, 14, 10, .45) 34%, rgba(20, 14, 10, 0) 60%);
   }
@@ -512,7 +530,7 @@ html:not(.has-scenes) .hiw-hero__cue { display: none; }
    ellipse with thin gold lines to the centre (16:9 map, so the SVG
    lines and the % card positions share one coordinate system).
    <=768px: the cut-out, then the cards as a list. */
-.hiw-system .scene { padding-top: var(--section-y); }
+.hiw-system .scene:not(.hiw-layered) { padding-top: var(--section-y); }
 .hiw-system__in { display: grid; justify-items: center; gap: clamp(28px, 4svh, 48px); }
 .hiw-system__map { position: relative; width: 100%; }
 .hiw-system__img {

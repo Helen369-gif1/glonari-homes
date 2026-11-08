@@ -1,9 +1,11 @@
 /* ==========================================================
    Glonari Homes — How It Works
-   Three pinned scenes on wide screens (.has-scenes, >=769px):
+   Five pinned scenes on wide screens (.has-scenes, >=769px):
      1) first screen — terrace / words / family, the hero.js layering;
-     2) chapter 04 — the results flow builds node by node;
-     3) chapter 08 — five parts gather around the family and Gia.
+     2) chapter 02 opener — café terrace / friends, two-speed zoom (layeredScenes);
+     3) chapter 04 — the results flow builds node by node;
+     4) chapter 08 opener — home terrace / family dinner, the same (layeredScenes);
+     5) chapter 08 — five parts gather around the family and Gia.
    Calm extras: chapter openers zoom slowly; chapter 03 plays two
    small chats on its photos. Chapter rail: see the second block.
    Scrubbed timelines use fromTo only (from breaks on refresh).
@@ -120,13 +122,37 @@
     };
   }
 
-  /* Chapter openers (02, 05, 08): the photo comes slowly closer while it passes. Not pinned. */
-  function openers() {
+  /* Layered chapter openers 02 and 08, pinned (owner 2026-11-09): two-speed parallax — the
+     terrace 1→BG_ZOOM, the people 1→FG_ZOOM, both around --po (CSS, per opener) — then the
+     number, the eyebrow and the heading come in; a short hold before release.
+     Zoom kept moderate (owner: 1.08/1.15 cut the woman's head under the header at the end);
+     the gap between the two speeds is what reads as depth. */
+  const BG_ZOOM = 1.04, FG_ZOOM = 1.12;
+  function layeredScenes() {
+    $$(".scene.hiw-layered").forEach((scene) => {
+      gsap.timeline({ scrollTrigger: scrubTo(scene), defaults: { ease: "none" } })
+        .fromTo($(".hiw-opener__bg", scene), { scale: 1 }, { scale: BG_ZOOM, duration: 1 }, 0)
+        .fromTo($(".hiw-opener__fg", scene), { scale: 1 }, { scale: FG_ZOOM, duration: 1 }, 0)
+        .fromTo($$(".hiw-opener__copy > *", scene), { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: .16, stagger: .08 }, .42)
+        .to({}, { duration: .15 });
+    });
+  }
+
+  /* Chapter openers (02, 05, 08): the photo comes slowly closer while it passes. Not pinned.
+     02 and 08 are layered (terrace + people cut-out): on phones the same two-speed zoom runs
+     here unpinned; on wide screens they are the pinned layeredScenes() and are skipped. */
+  function openers(pinned) {
     $$("[data-opener]").forEach((op) => {
-      gsap.fromTo($(".hiw-opener__img", op), { scale: 1 }, {
-        scale: 1.08, ease: "none",
-        scrollTrigger: { trigger: op, start: "top bottom", end: "bottom top", scrub: true, invalidateOnRefresh: true },
-      });
+      const st = { trigger: op, start: "top bottom", end: "bottom top", scrub: true, invalidateOnRefresh: true };
+      const fg = $(".hiw-opener__fg", op);
+      if (fg && pinned) return;
+      if (fg) {
+        gsap.timeline({ defaults: { ease: "none" }, scrollTrigger: st })
+          .fromTo($(".hiw-opener__bg", op), { scale: 1 }, { scale: BG_ZOOM }, 0)
+          .fromTo(fg, { scale: 1 }, { scale: FG_ZOOM }, 0);
+      } else {
+        gsap.fromTo($(".hiw-opener__img", op), { scale: 1 }, { scale: 1.08, ease: "none", scrollTrigger: st });
+      }
     });
   }
 
@@ -211,13 +237,15 @@
   mm.add("(min-width: 769px) and (prefers-reduced-motion: no-preference)", () => {
     doc.classList.add("has-scenes");
     heroScene();
+    layeredScenes();
     const undoResults = resultsScene();
     systemScene();
+    openers(true);
     doc.classList.remove("scenes-pending");
     ScrollTrigger.refresh();
     return () => { doc.classList.remove("has-scenes"); if (undoResults) undoResults(); };
   });
-  mm.add("(prefers-reduced-motion: no-preference)", () => { openers(); });
+  mm.add("(max-width: 768px) and (prefers-reduced-motion: no-preference)", () => { openers(false); });
   // >=1101px: the grid is one row of 4 there (2x2 below, which would need vertical moves)
   mm.add("(min-width: 1101px) and (prefers-reduced-motion: no-preference)", () => {
     const undo = [["#ch-01 .hiw-grid4", "center"], ["#ch-02 .hiw-grid4", "left"]]
