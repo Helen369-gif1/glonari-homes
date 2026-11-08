@@ -23,7 +23,7 @@
   /* When life changes (a pause, no pin, no GSAP): three scenarios play in turn.
      The end of the active timer bar (CSS animation `life-timer`, length --life-ms) advances the
      scene; steps, pill and timer all restart with .is-run, so CSS is the single clock.
-     .is-paused (CSS) freezes every animation: off screen, and only while a finger is down (no hover pause).
+     .is-paused (CSS) freezes every animation: off screen only (no hover or touch pause).
      Reduced motion: no autoplay, no movement — manual switching only (instant).
      Without JS the CSS shows scene 1 complete (this function adds .is-on). */
   const LIFE_SCENE_MS = 4000; // how long one scenario is shown
@@ -77,9 +77,6 @@
     [...tabs, ...dots].forEach((b) => b.addEventListener("click", () => go(+b.dataset.i)));
 
     const toggle = (why, on) => { on ? hold.add(why) : hold.delete(why); sync(); };
-    stage.addEventListener("touchstart", () => toggle("touch", true), { passive: true });
-    stage.addEventListener("touchend", () => { toggle("touch", false); restart(); }, { passive: true }); // after a touch the cycle starts the scene afresh
-    stage.addEventListener("touchcancel", () => toggle("touch", false), { passive: true });
 
     // swipe on the photo stack
     const stack = $(".liv-stage__stack", stage);
@@ -234,8 +231,8 @@
      the place label follows, and for each place Gia types (the home page's three dots)
      and her message is added under the earlier ones. The list slides up so the newest
      message is at the bottom; at most 3 stay in view (the oldest fades as it leaves).
-     The chat body's height (--gia-h) = the tallest run of 3 consecutive messages,
-     measured on every refresh; the list offsets are function values (invalidateOnRefresh). */
+     The chat body's height follows what is visible (head only → dots → message);
+     heights and list offsets are function values, re-measured on refresh (invalidateOnRefresh). */
   function giaScene() {
     const scene = $('[data-scene="liv-gia"]');
     if (!scene) return () => {};
@@ -245,17 +242,13 @@
     const items = $$(".liv-gia__item", scene);
     const body = $(".liv-gia__body", scene);
     const list = $(".liv-gia__msgs", scene);
-    let H = 0;
-
-    const bottom = (i) => items[i].offsetTop + items[i].offsetHeight;
-    const fit = () => {
-      H = 0;
-      items.forEach((_, i) => { H = Math.max(H, bottom(i) - items[Math.max(0, i - SHOW + 1)].offsetTop); });
-      body.style.setProperty("--gia-h", Math.ceil(H) + "px");
-    };
-    const yAt = (i) => -Math.max(0, Math.ceil(bottom(i) - H));
-    fit();
-    ScrollTrigger.addEventListener("refreshInit", fit);
+    // the chat grows with its content (owner, 2026-11-08: no big empty panel at the start):
+    // the body's height follows the visible run — just the head, then room for the dots,
+    // then the message; once 3 are in view the list slides up and the oldest fades.
+    const first = (i) => items[Math.max(0, i - SHOW + 1)].offsetTop;
+    const yAt = (i) => -first(i);
+    const hTyping = (i) => Math.ceil(items[i].offsetTop + $(".msg--typing", items[i]).offsetHeight - first(i));
+    const hMsg = (i) => Math.ceil(items[i].offsetTop + items[i].offsetHeight - first(i));
 
     const tl = gsap.timeline({ scrollTrigger: scrubTo(scene), defaults: { ease: "none" } });
     tl.fromTo($(".liv-gia__zoom", scene), { scale: 1 }, { scale: 1.04, duration: 4.4 }, 0);
@@ -274,16 +267,15 @@
           .fromTo(list, { y: () => yAt(i - 1) }, { y: () => yAt(i), duration: .15, immediateRender: false }, i + .3);
       }
       if (i >= SHOW) tl.fromTo(items[i - SHOW], { opacity: 1 }, { opacity: 0, duration: .12, immediateRender: false }, i + .3);
-      tl.fromTo(typing, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .1 }, i + .4)
+      tl.fromTo(body, { height: () => (i ? hMsg(i - 1) : 0) }, { height: () => hTyping(i), duration: .12, ease: "power1.inOut", immediateRender: !i }, i + .3)
+        .fromTo(typing, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .1 }, i + .4)
         .fromTo(typing, { opacity: 1 }, { opacity: 0, duration: .06, immediateRender: false }, i + .7)
+        .fromTo(body, { height: () => hTyping(i) }, { height: () => hMsg(i), duration: .14, ease: "power1.inOut", immediateRender: false }, i + .7)
         .fromTo(msg, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .14 }, i + .72);
     });
     tl.to({}, { duration: .4 }); // hold the garden and the full history before the pin releases
 
-    return () => {
-      ScrollTrigger.removeEventListener("refreshInit", fit);
-      body.style.removeProperty("--gia-h");
-    };
+    return () => body.style.removeProperty("height");
   }
 
   /* The bigger idea (Endel Manifesto): one screen pinned over the night villa. The five

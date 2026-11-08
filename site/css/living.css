@@ -569,7 +569,7 @@ html:not(.has-scenes) .liv-step:last-child .liv-step__label::after {
    views as small cards. .has-scenes (>=769px, motion-safe): the
    stage is pinned, the chat sits over the right pane / armchair,
    giaScene() in living.js runs the views, the place label and the
-   messages (max 3 visible; --gia-h is measured by JS).
+   messages (max 3 visible; the chat body grows with them, set by JS).
    Window glass in the 16:9 frame: x 14–91%, y 6–80%.
    ========================================================== */
 .liv-gia { position: relative; padding-top: var(--section-y); background: var(--gh-paper); }
@@ -686,7 +686,7 @@ html:not(.has-scenes) .liv-gia__place-i:not(:last-child) { display: none; }
 .has-scenes .liv-gia__chat .chat__head { margin-bottom: 2px; }
 .has-scenes .liv-gia__body {
   box-sizing: content-box;
-  height: var(--gia-h, 290px);
+  height: 0;   /* giaScene() grows it with the messages */
   padding-top: 12px;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(transparent, #000 12px);
