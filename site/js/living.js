@@ -275,13 +275,28 @@
     });
     tl.to({}, { duration: .4 }); // hold the garden and the full history before the pin releases
 
-    // looping view videos (preload none, poster first): they load and play only while
-    // the scene is near or on screen, and pause once it has gone
-    const vids = $$("[data-gia-video]", scene);
-    const play = (on) => vids.forEach((v) => { if (on) { const p = v.play(); if (p) p.catch(() => {}); } else v.pause(); });
-    const vt = vids.length ? ScrollTrigger.create({ trigger: scene, start: "top bottom", end: "bottom top", onToggle: (s) => play(s.isActive) }) : null;
+    // looping view videos (preload none, poster first): they start loading once the scene is
+    // near, and only a view that is actually seen plays — shown (opacity > 0) and not yet
+    // fully covered by the next one; the rest are paused. All pause when the scene has gone.
+    let near = false;
+    const syncVideos = () => views.forEach((v, i) => {
+      if (v.tagName !== "VIDEO") return;
+      const next = views[i + 1];
+      const seen = near && +gsap.getProperty(v, "opacity") > .01 && !(next && +gsap.getProperty(next, "opacity") >= .99);
+      if (seen && v.paused) { const p = v.play(); if (p) p.catch(() => {}); }
+      else if (!seen && !v.paused) v.pause();
+    });
+    const vt = ScrollTrigger.create({
+      trigger: scene, start: "top bottom", end: "bottom top",
+      onToggle: (s) => {
+        near = s.isActive;
+        if (near) views.forEach((v) => { if (v.tagName === "VIDEO") v.preload = "auto"; });
+        syncVideos();
+      },
+    });
+    tl.eventCallback("onUpdate", syncVideos);
 
-    return () => { body.style.removeProperty("height"); if (vt) vt.kill(); play(false); };
+    return () => { body.style.removeProperty("height"); vt.kill(); near = false; syncVideos(); };
   }
 
   /* The bigger idea (Endel Manifesto): one screen pinned over the night villa. The five
