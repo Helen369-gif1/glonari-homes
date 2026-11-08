@@ -275,7 +275,13 @@
     });
     tl.to({}, { duration: .4 }); // hold the garden and the full history before the pin releases
 
-    return () => body.style.removeProperty("height");
+    // looping view videos (preload none, poster first): they load and play only while
+    // the scene is near or on screen, and pause once it has gone
+    const vids = $$("[data-gia-video]", scene);
+    const play = (on) => vids.forEach((v) => { if (on) { const p = v.play(); if (p) p.catch(() => {}); } else v.pause(); });
+    const vt = vids.length ? ScrollTrigger.create({ trigger: scene, start: "top bottom", end: "bottom top", onToggle: (s) => play(s.isActive) }) : null;
+
+    return () => { body.style.removeProperty("height"); if (vt) vt.kill(); play(false); };
   }
 
   /* The bigger idea (Endel Manifesto): one screen pinned over the night villa. The five

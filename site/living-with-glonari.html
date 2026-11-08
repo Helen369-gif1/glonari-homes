@@ -274,9 +274,11 @@
           <div class="liv-gia__box">
             <div class="liv-gia__frame">
               <div class="liv-gia__zoom">
-                <img class="liv-gia__view liv-gia__view--city" src="assets/images/living-05-view-city-1600.webp"
-                     srcset="assets/images/living-05-view-city-1600.webp 1600w, assets/images/living-05-view-city-2560.webp 2560w"
-                     sizes="(min-width: 769px) 96vw, 134vw" width="2560" height="1440" loading="lazy" alt="">
+                <video class="liv-gia__view liv-gia__view--city" poster="assets/images/living-05-view-city-poster-1280.webp"
+                       width="1280" height="720" muted loop playsinline preload="none" aria-hidden="true" data-gia-video>
+                  <source src="assets/images/living-05-view-city-1280.webm" type="video/webm">
+                  <source src="assets/images/living-05-view-city-1280.mp4" type="video/mp4">
+                </video>
                 <img class="liv-gia__view liv-gia__view--suburb" src="assets/images/living-05-view-suburb-1600.webp"
                      srcset="assets/images/living-05-view-suburb-1600.webp 1600w, assets/images/living-05-view-suburb-2560.webp 2560w"
                      sizes="(min-width: 769px) 96vw, 134vw" width="2560" height="1440" loading="lazy" alt="">
@@ -330,7 +332,9 @@
           <!-- static layout only (phones, reduced motion, no JS): the four views as small cards -->
           <ul class="liv-gia__places" data-reveal>
             <li><figure>
-              <img src="assets/images/living-05-view-city-1600.webp" width="1600" height="900" loading="lazy" alt="A city skyline lit up at dusk above a river">
+              <img src="assets/images/living-05-view-city-poster-800.webp"
+                   srcset="assets/images/living-05-view-city-poster-800.webp 800w, assets/images/living-05-view-city-poster-1280.webp 1280w"
+                   sizes="(max-width: 768px) 50vw, 600px" width="1280" height="720" loading="lazy" alt="A city skyline at dusk above a river with boats">
               <figcaption>City</figcaption>
             </figure></li>
             <li><figure>
