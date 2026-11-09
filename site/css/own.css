@@ -36,6 +36,9 @@
   transform-origin: 78% 30%;       /* house and woman zoom around her face, so she stays on the porch and under the header */
   will-change: transform;
 }
+/* the woman a bit smaller than in the source (owner's reference): she sits further back on the porch,
+   feet and deck visible. CSS `scale` composes with GSAP's transform (the scroll zoom) */
+.own-hero__woman { scale: .86; translate: -2% 2.5%; }   /* = WOMAN, WX, WY in own.js */
 .own-hero__word {
   position: absolute;
   left: var(--wx);

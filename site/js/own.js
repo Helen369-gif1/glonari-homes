@@ -18,6 +18,12 @@
 
   const scrubTo = (trigger) => ({ trigger, start: "top top", end: "bottom bottom", scrub: .6, invalidateOnRefresh: true });
 
+  // the woman's base size (owner: smaller than the source, she sits further back on the porch);
+  // the same value is the CSS `scale` for the static layout — GSAP folds that property into its own transform
+  const WOMAN = .86;
+  // and her place on the porch (owner's reference: head below the top of the door), % of the frame;
+  // same values as the CSS `translate` for the static layout
+  const WX = -2, WY = 2.5;
   function heroScene() {
     const scene = $('[data-scene="own-hero"]');
     if (!scene) return;
@@ -29,10 +35,10 @@
       // coming home: the porch comes in over the sunset
       .fromTo(house, { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1, duration: .3, ease: "power1.out" }, .04)
       // the woman appears in her chair, in front of the word
-      .fromTo(woman, { opacity: 0, yPercent: 3 }, { opacity: 1, yPercent: 0, duration: .2, ease: "power1.out" }, .36)
+      .fromTo(woman, { opacity: 0, xPercent: WX, yPercent: WY + 3, scale: WOMAN }, { opacity: 1, xPercent: WX, yPercent: WY, scale: WOMAN, duration: .2, ease: "power1.out" }, .36)
       // a slow shared zoom (same transform-origin, so she stays on the porch)
       .fromTo(house, { scale: 1 }, { scale: 1.05, duration: .42, immediateRender: false }, .58)
-      .fromTo(woman, { scale: 1 }, { scale: 1.09, duration: .42, immediateRender: false }, .58)
+      .fromTo(woman, { scale: WOMAN }, { scale: WOMAN * 1.09, duration: .42, immediateRender: false }, .58)
       .fromTo($(".own-hero__shade", scene), { opacity: 0 }, { opacity: 1, duration: .2 }, .62)
       .fromTo($$("[data-hcopy]", scene), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .16, stagger: .08 }, .7);
   }
