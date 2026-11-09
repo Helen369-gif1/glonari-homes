@@ -99,13 +99,19 @@ Last updated: 2026-11-08. Update this file after every significant step so a new
   - Checked (headless Chrome) at 1440×900, 1024×768, 375×812 + reduced motion at 1440: lines one at a time and readable, overlay thins, button visible and clickable at the end (hidden before), static layout correct, images load, no horizontal scroll, no console errors (favicon 404 only).
   - Open: owner review in a real browser (the dust and the pacing).
 
+## In progress — Already Own a Home? (`site/already-own-a-home.html`, `css/own.css`, `js/own.js`)
+
+- **Hero (2026-11-09), pinned scene, modelled on the Living hero.** Owner: the design may depart from the references doc; keep the v2 copy where possible. Layers in one 16:9 frame: sunset (back) · porch home · the word "HOME" · woman in a wicker chair (cut-out). ≥769px motion-safe (`heroScene()` in `own.js`, `--travel: 180svh`): sunset + word → the porch comes in (opacity, scale 1.12→1) → the woman (in front of the word). Owner fix (same day): "HOME" moved left and down (`--wx: 41%`, `bottom: 56%`), so it sits under the porch roof, left of the woman, clear of the header and the lanterns, with a denser text-shadow for the light column behind the H → shared slow zoom (house 1.05, woman 1.09, origin at her face 78% 30%) → shade → copy. Headline "Your Home. More Possibilities." (owner's line, replaces v2 "Love Your Home? Make It Smarter."); sub = v2 hero copy verbatim. Phones/portrait: frame fills the height, centred on the woman (`--fx: 72%`), word above her, static final layout.
+  - Images: the owner's three 2000×1126 layers (aligned 1:1) → `own-00-sunset-bg`, `-porch-house` (alpha), `-woman-cutout` (alpha), 2000/1600 WebP q 78; sources in `masters/` under the same names.
+  - Checked at 1440×900 and 375×812: no console errors, images load, no horizontal scroll.
+  - Open: owner review. Next: §1 What Gia can do in your home, §2 Module vs. full Glonari Home, §3 Status and CTA.
+
 ## Not started
 
 Stub pages (shared header/footer + a one-line placeholder only), in the build order from `Glonari Homes — Website Architecture & Copy v2.docx`:
 
-1. Already Own a Home?
-2. Find Your Home
-3. FAQs
+1. Find Your Home
+2. FAQs
 
 See `SITE-STRUCTURE.md` for each page's planned sections.
 
@@ -118,7 +124,7 @@ See `SITE-STRUCTURE.md` for each page's planned sections.
 
 ## Next step
 
-Build **Already Own a Home?**, then the remaining pages in the order listed above, each following `DESIGN-SYSTEM-HOMES.md` and the section list in `SITE-STRUCTURE.md`.
+Finish **Already Own a Home?** (hero done; sections 1–3 next), then the remaining pages in the order listed above, each following `DESIGN-SYSTEM-HOMES.md` and the section list in `SITE-STRUCTURE.md`.
 
 ## How to resume on another computer
 

@@ -71,11 +71,13 @@ Planned sections:
 6. The journey before and after (`#journey-before-and-after`, pause, paper) — preview frame linking to Global Dream Journey™ + copy, two columns ≥1024px ✅
 7. The bigger idea (`#the-bigger-idea`, scene, dark) — night villa, five manifesto lines one at a time in gold Cormorant, gold dust (canvas), the night lightens, gold button → Find Your Home; static: all lines stacked ✅
 
-### 4. Already Own a Home? — `site/already-own-a-home.html` — ⏳ stub only
+### 4. Already Own a Home? — `site/already-own-a-home.html` — 🔨 in progress
+
+Page files: `css/own.css`, `js/own.js`.
 
 Planned sections:
 
-- Hero
+- Hero (scene) — sunset → porch home → "HOME" → woman in her chair, copy "Your Home. More Possibilities." ✅
 1. What Gia can do in your home
 2. Module vs. full Glonari Home
 3. Status and CTA

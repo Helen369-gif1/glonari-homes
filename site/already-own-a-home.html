@@ -4,13 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Already Own a Home? &middot; Glonari Homes</title>
-<meta name="description" content="A Glonari Home is a beautiful place to live, paired with a Home Business that helps pay for it. Gia, your personal AI, does most of the work.">
+<meta name="description" content="The Glonari Home Module brings Gia, Global Connections and Digital Banker to the home you already own. You keep your title and your mortgage.">
+<script>
+  /* Wide screens with motion: hide the scene start states until GSAP takes over (no flash of the final layout).
+     Safety net: if the scripts never arrive, the static layout comes back after 4s. */
+  if (matchMedia("(min-width: 769px) and (prefers-reduced-motion: no-preference)").matches) {
+    document.documentElement.classList.add("scenes-pending");
+    setTimeout(function () { document.documentElement.classList.remove("scenes-pending"); }, 4000);
+  }
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/own.css">
 </head>
-<body class="no-js">
+<body class="no-js own-page">
 
 <a class="skip" href="#main">Skip to content</a>
 
@@ -40,12 +49,42 @@
 </header>
 <!-- /partial:header -->
 
-<main id="main" class="stub">
-  <div class="container">
-    <p class="eyebrow">Already Own a Home?</p>
-    <h1 class="h2">Love Your Home? Make It Smarter.</h1>
-    <p>This page is being built. Meanwhile, start from the <a href="index.html">home page</a>.</p>
-  </div>
+<main id="main">
+
+  <!-- ============ First screen (scene): sunset · porch home · word · woman ============ -->
+  <section class="own-hero" aria-labelledby="own-title" data-hero>
+    <div class="scene" data-scene="own-hero" style="--travel: 180svh">
+      <div class="scene__stage own-hero__stage">
+        <div class="own-hero__frame">
+          <img class="own-hero__layer own-hero__sky" src="assets/images/own-00-sunset-bg-1600.webp"
+               srcset="assets/images/own-00-sunset-bg-1600.webp 1600w, assets/images/own-00-sunset-bg-2000.webp 2000w"
+               sizes="max(100vw, 177.8svh)" width="2000" height="1126" alt="" fetchpriority="high">
+          <img class="own-hero__layer own-hero__house" src="assets/images/own-00-porch-house-1600.webp"
+               srcset="assets/images/own-00-porch-house-1600.webp 1600w, assets/images/own-00-porch-house-2000.webp 2000w"
+               sizes="max(100vw, 177.8svh)" width="2000" height="1126" alt="" fetchpriority="high">
+          <div class="own-hero__layer own-hero__wordbox" aria-hidden="true">
+            <p class="own-hero__word">Home</p>
+          </div>
+          <img class="own-hero__layer own-hero__woman" src="assets/images/own-00-woman-cutout-1600.webp"
+               srcset="assets/images/own-00-woman-cutout-1600.webp 1600w, assets/images/own-00-woman-cutout-2000.webp 2000w"
+               sizes="max(100vw, 177.8svh)" width="2000" height="1126" fetchpriority="high"
+               alt="A woman with a cup of tea relaxes in a wicker chair on the porch of her craftsman home at golden hour">
+        </div>
+
+        <div class="own-hero__shade" aria-hidden="true"></div>
+
+        <div class="own-hero__copy">
+          <div class="own-hero__copy-in">
+            <h1 class="own-hero__title" id="own-title" data-hcopy>Your Home. More Possibilities.</h1>
+            <p class="own-hero__sub" data-hcopy>The Glonari Home Module&trade; brings Gia, Global Connections and Digital Banker to the home you already own. You keep your title and your mortgage. Your home gains an economic layer.</p>
+          </div>
+        </div>
+
+        <div class="own-hero__cue" aria-hidden="true">Scroll</div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <!-- partial:footer -->
@@ -97,5 +136,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script src="js/main.js" defer></script>
+<script src="js/own.js" defer></script>
 </body>
 </html>
