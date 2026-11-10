@@ -38,7 +38,14 @@
 }
 /* the woman a bit smaller than in the source (owner's reference): she sits further back on the porch,
    feet and deck visible. CSS `scale` composes with GSAP's transform (the scroll zoom) */
-.own-hero__woman { scale: .86; translate: -2% 2.5%; }   /* = WOMAN, WX, WY in own.js */
+.own-hero__woman, .own-hero__shadow { scale: .86; translate: -2% 0.5%; }   /* = WOMAN, WX, WY in own.js */
+.own-hero__shadow {   /* soft contact shadows on the deck: under the pouf, the chair and feet, the lantern. Positions are % of the 2000x1126 frame */
+  background:
+    radial-gradient(ellipse 13% 3.2% at 54% 89.2%, rgba(14, 6, 2, .85), rgba(14, 6, 2, .45) 50%, transparent 78%),
+    radial-gradient(ellipse 16% 3.4% at 65% 93.6%, rgba(14, 6, 2, .8), rgba(14, 6, 2, .42) 50%, transparent 78%),
+    radial-gradient(ellipse 7% 2.2% at 92.5% 95.4%, rgba(14, 6, 2, .9), rgba(14, 6, 2, .5) 50%, transparent 78%);
+  pointer-events: none;
+}
 .own-hero__word {
   position: absolute;
   left: var(--wx);
@@ -112,6 +119,7 @@ html:not(.has-scenes) .own-hero__cue { display: none; }
    so the first frame is the sunset + the word */
 .scenes-pending .own-hero__house,
 .scenes-pending .own-hero__woman,
+.scenes-pending .own-hero__shadow,
 .scenes-pending [data-hcopy],
 .scenes-pending .own-hero__shade { opacity: 0; }
 

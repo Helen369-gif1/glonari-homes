@@ -23,12 +23,12 @@
   const WOMAN = .86;
   // and her place on the porch (owner's reference: head below the top of the door), % of the frame;
   // same values as the CSS `translate` for the static layout
-  const WX = -2, WY = 2.5;
+  const WX = -2, WY = 0.5;
   function heroScene() {
     const scene = $('[data-scene="own-hero"]');
     if (!scene) return;
     const house = $(".own-hero__house", scene);
-    const woman = $(".own-hero__woman", scene);
+    const woman = [$(".own-hero__woman", scene), $(".own-hero__shadow", scene)];
 
     gsap.timeline({ scrollTrigger: scrubTo(scene), defaults: { ease: "none" } })
       .fromTo($(".own-hero__cue", scene), { opacity: 1 }, { opacity: 0, duration: .06 }, 0)
